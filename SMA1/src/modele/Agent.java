@@ -1,22 +1,23 @@
 package modele;
 
+import java.awt.Color;
 import java.util.HashMap;
-
-import wator.Movement;
+import java.util.Observable;
 
 public abstract class Agent {
-	private int posX;
-	private int posY;
+	protected int posX;
+	protected int posY;
+	private Observable env;
 	private HashMap<String,Action> actions;
+	private Color couleur;
 	
-	public Agent(int posX, int posY){
+	public Agent(int posX, int posY, Observable e){
 		this.posX = posX;
 		this.posY = posY;
+		this.env = e;
 	}
 	
-	public void decide(){
-		
-	}
+	public abstract void decide();
 	
 	public int getPosX() {
 		return posX;
@@ -38,5 +39,11 @@ public abstract class Agent {
 	}
 
 
+	public Color getColor() {
+		return this.couleur;
+	}
 	
+	public void setColor(Color couleur) {
+		this.couleur = couleur;
+	}
 }

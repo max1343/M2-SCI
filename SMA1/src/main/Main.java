@@ -1,12 +1,14 @@
+package main;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import modele.Agent;
 import modele.Environnement;
 import modele.SMA;
-import particules.Particule;
+import particules.AgentParticule;
 import vue.CanvasGrille;
 import vue.Fenetre;
 
@@ -32,8 +34,8 @@ public class Main {
 		
 		
 		CanvasGrille c; 
-		ArrayList<Particule> truc = new ArrayList<Particule>();
-		Particule a;
+		ArrayList<Agent> truc = new ArrayList<Agent>();
+		AgentParticule a;
 		SMA sma;
 
 		
@@ -64,8 +66,8 @@ public class Main {
 
 			
 			for(int i =1;i<=Integer.parseInt(prop.getProperty("db.nbParticles"));i++){
-				a = new Particule(env, seed, trace);
-				truc.add(a);
+				a = new AgentParticule(env, seed, trace);
+				truc.add( (Agent) a);
 				env.setBall(a);
 				seed++;
 			}

@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.Observable;
 import java.util.Random;
 
-import particules.Particule;
+import particules.AgentParticule;
 
 public class SMA extends Observable {
-	private ArrayList<Particule> agents;
-	private Environnement e;
+	private ArrayList<Agent> agents;
+	private Observable e;
 	public static int FPS;
 	public int nbTicks;
 	public String scheduling;
@@ -24,7 +24,7 @@ public class SMA extends Observable {
 		this.trace = trace;
 	}
 
-	public SMA(ArrayList<Particule> agents, Environnement e, boolean trace){
+	public SMA(ArrayList<Agent> agents, Observable e, boolean trace){
 		this.agents = agents;
 		this.e = e;
 		this.trace = trace;
@@ -34,7 +34,7 @@ public class SMA extends Observable {
 	public void schedule(){
 		int rand = 0,nb = agents.size();
 		if(scheduling.equals("sequentiel")){
-			for(Particule ag : agents){
+			for(Agent ag : agents){
 				ag.decide();
 			}
 		}
@@ -46,7 +46,7 @@ public class SMA extends Observable {
 			}
 			else{
 				Collections.shuffle(agents);
-				for(Particule ag : agents){
+				for(Agent ag : agents){
 					ag.decide();
 				}
 			}
