@@ -5,6 +5,24 @@ import java.util.HashMap;
 import java.util.Observable;
 
 public abstract class Agent {
+	
+	public enum Direction{
+		Nord(0,1),
+		Sud(0,-1),
+		Est(1,0),
+		Ouest(-1,0),
+		NordEst(1,1),
+		NordOuest(-1,1),
+		SudEst(1,-1),
+		SudOuest(-1,-1);
+		
+		int pasX, pasY;
+		Direction(int pasX, int pasY){
+			this.pasX = pasX;
+			this.pasY = pasY;
+		}
+	};
+	
 	protected int posX;
 	protected int posY;
 	private Observable env;
