@@ -16,15 +16,21 @@ public class CanvasGrille extends Canvas implements Observer{
 	private ArrayList<Agent> listeAgents;
 	public boolean grid;
 	public int cSizeX, cSizeY;
+	private int type;
 	
 	public CanvasGrille(Environnement env){
 		this.e = env;
 		this.setSize(cSizeX, cSizeY);
+		if(type == 2) 
+			this.setBackground(Color.CYAN);
 	}
 	
 	
 	public void paint(Graphics g){
-		g.setColor(Color.BLACK);
+		if(type==2)
+			g.setColor(Color.WHITE);
+		else
+			g.setColor(Color.BLACK);
 		
 		if(this.grid == true){
 			int x1 = this.getWidth()/e.height;
@@ -76,4 +82,9 @@ public class CanvasGrille extends Canvas implements Observer{
 	public void setCSizeY(int parseInt) {
 		this.cSizeY = parseInt;
 	}
+	
+	public void setType(int t){
+		this.type = t;
+	}
+
 }

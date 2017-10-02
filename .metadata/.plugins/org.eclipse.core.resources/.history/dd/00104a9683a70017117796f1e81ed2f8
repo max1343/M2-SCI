@@ -1,0 +1,10 @@
+package modele;
+
+public abstract class Action {
+
+	public void move(int x, int y, Agent a){
+		
+	}
+	
+	
+}

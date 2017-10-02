@@ -1,0 +1,19 @@
+package wator;
+
+import java.awt.Color;
+
+import modele.Agent;
+import modele.Environnement;
+
+public class Shark extends Agent {
+	private int sharkBreedTime;
+	private Color couleur;
+	private int sharkStarveTime;
+
+	public Shark(int posX, int posY, int sharkBreedTime, Color couleur, int sharkStarveTime,boolean trace,Environnement env){
+		super(posX, posY,couleur,env,trace);
+		this.sharkBreedTime = sharkBreedTime;
+		this.sharkStarveTime = sharkStarveTime;
+		this.couleur = couleur;
+	}
+}

@@ -3,6 +3,7 @@ package modele;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.Random;
 
 public abstract class Agent {
 	
@@ -21,18 +22,32 @@ public abstract class Agent {
 			this.pasX = pasX;
 			this.pasY = pasY;
 		}
+		
+		public int getX(){
+			return this.pasX;
+		}
+		
+		public int getY(){
+			return this.pasY;
+		}
 	};
 	
 	protected int posX;
 	protected int posY;
-	private Observable env;
+	private Environnement env;
 	private HashMap<String,Action> actions;
-	private Color couleur;
+	protected Color couleur;
+	public boolean trace;
 	
-	public Agent(int posX, int posY, Observable e){
+	public Agent(int posX, int posY, Color c, Environnement e, boolean trace){
 		this.posX = posX;
 		this.posY = posY;
+		this.couleur = c;
 		this.env = e;
+		
+		this.trace = trace;
+			
+		this.env = env;
 	}
 	
 	public abstract void decide();
@@ -63,5 +78,9 @@ public abstract class Agent {
 	
 	public void setColor(Color couleur) {
 		this.couleur = couleur;
+	}
+	
+	public Environnement getEnv(){
+		return this.env;
 	}
 }

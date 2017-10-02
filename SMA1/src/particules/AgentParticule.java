@@ -9,11 +9,10 @@ import modele.Environnement;
 public class AgentParticule extends Agent{
 	private int  pasX, pasY;
 	private Environnement env;
-	public Color couleur = Color.gray;
 	public boolean trace;
 	
 	public AgentParticule(Environnement env, int seed, boolean trace){
-		super(0,0,env);
+		super(0,0,Color.gray,env,trace);
 		int eX = env.height;
 		int eY = env.width;
 		this.trace = trace;
@@ -22,8 +21,8 @@ public class AgentParticule extends Agent{
 		
 		this.posX = rnd.nextInt(eX - 1); 
 		this.posY = rnd.nextInt(eY - 1); 
-		this.pasX =  rnd.nextInt(2) - 1; 
-		this.pasY =  rnd.nextInt(2) - 1; 
+		this.pasX = rnd.nextInt(2) - 1; 
+		this.pasY = rnd.nextInt(2) - 1; 
 		this.env = env;
 	}
 	
@@ -57,7 +56,7 @@ public class AgentParticule extends Agent{
 			}
 		}
 		if(trace)
-			System.out.println("Agent couleur: " + this.couleur);
+			System.out.println("Agent couleur: " + super.couleur);
 	}
 	
 	

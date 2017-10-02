@@ -1,4 +1,5 @@
 package main;
+import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +12,8 @@ import modele.SMA;
 import particules.AgentParticule;
 import vue.CanvasGrille;
 import vue.Fenetre;
+import wator.Fish;
+import wator.Shark;
 
 public class Main {
 	public boolean grid;
@@ -35,7 +38,7 @@ public class Main {
 		
 		CanvasGrille c; 
 		ArrayList<Agent> truc = new ArrayList<Agent>();
-		AgentParticule a;
+		Agent a;
 		SMA sma;
 
 		
@@ -64,20 +67,36 @@ public class Main {
 			
 			trace = Boolean.valueOf(prop.getProperty("db.trace"));
 
+			if(Integer.parseInt(prop.getProperty("db.type"))==1){
+				for(int i =1;i<=Integer.parseInt(prop.getProperty("db.nbParticles"));i++){
+					a = new AgentParticule(env, seed, trace);
+					truc.add( (Agent) a);
+					env.setBall(a);
+					seed++;
+				}	
+			}
+			else if(Integer.parseInt(prop.getProperty("db.type")) == 2){
+				for(int i =1;i<=Integer.parseInt(prop.getProperty("db.nbFish"));i++){			
+					a = new Fish(0,0,2,Color.BLUE,env, seed, trace,false);
+					truc.add( (Agent) a);
+					env.setBall((Agent) a);
+					seed++;
+				}
 			
-			for(int i =1;i<=Integer.parseInt(prop.getProperty("db.nbParticles"));i++){
-				a = new AgentParticule(env, seed, trace);
-				truc.add( (Agent) a);
-				env.setBall(a);
-				seed++;
+				for(int i =1;i<=Integer.parseInt(prop.getProperty("db.nbShark"));i++){			
+					a = new Shark(0,0,3,Color.BLUE,4,trace, env, seed,false);
+					truc.add( (Agent) a);
+					env.setBall((Agent) a);
+					seed++;
+				}
 			}
 			
-	
 			sma = new SMA(truc,env, trace);
 			sma.nbTicks =  Integer.parseInt(prop.getProperty("db.nbTicks"));
 			sma.FPS =  Integer.parseInt(prop.getProperty("db.delay"));
 			sma.scheduling = prop.getProperty("db.scheduling");
 			Fenetre fen = new Fenetre(c);
+			c.setType(Integer.parseInt(prop.getProperty("db.type")));
 			sma.addObserver(c);
 			sma.run();
 		

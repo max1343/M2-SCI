@@ -1,0 +1,46 @@
+package wator;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
+import modele.Action;
+import modele.Agent;
+import modele.Environnement;
+
+public class Shark extends Agent {
+	private int sharkBreedTime;
+	private Color couleur;
+	private int sharkStarveTime;
+	private Action ac;
+
+	public Shark(int posX, int posY, int sharkBreedTime, Color couleur, int sharkStarveTime,boolean trace,Environnement env,int seed,boolean child){
+		super(posX, posY,couleur,env,trace);
+		this.sharkBreedTime = sharkBreedTime;
+		this.sharkStarveTime = sharkStarveTime;
+		this.couleur = couleur;
+		
+		if (!child){
+			Random rnd = new Random(seed);
+			this.posX = rnd.nextInt(env.height - 1); 
+			this.posY = rnd.nextInt(env.width - 1); 
+		}
+	}	
+
+	@Override
+	public void decide() {
+		ArrayList<Direction> ad = this.getEnv().lookAt("vide",this.posX,this.posY);
+		if(ad != null){
+			Collections.shuffle(ad);
+			ac.move(ad.get(1).getX(),ad.get(1).getY(), this);
+			if(countSharkBreedTime == 0){
+				Fish f = new Fish(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.fishSharkTime, Color.green, this.getEnv(), seed, super.trace, true);
+				this.getEnv().setBall(f);
+				countSharkBreedTime = fishSharkTime;
+			}else
+				countSharkBreedTime--;
+		}
+		this.couleur = Color.BLUE;
+	}
+}

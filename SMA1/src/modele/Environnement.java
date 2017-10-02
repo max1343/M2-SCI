@@ -1,11 +1,10 @@
 package modele;
 import java.util.ArrayList;
-
-
 import java.util.Observable;
-import java.util.Observer;
 
-import particules.AgentParticule; 
+import modele.Agent.Direction;
+import particules.AgentParticule;
+import wator.Fish; 
 
 public class Environnement extends Observable {
 	public int height, width;
@@ -26,11 +25,12 @@ public class Environnement extends Observable {
 		return agents[x][y];
 	}
 	
-	public void setBall(AgentParticule a){
+
+	public void setBall(Agent a){
 		agents[a.getPosX()][a.getPosY()] = a;
 	}
 	
-	public void deleteBall(AgentParticule a){
+	public void deleteBall(Agent a){
 		agents[a.getPosX()][a.getPosY()] = null;
 	}
 
@@ -50,5 +50,24 @@ public class Environnement extends Observable {
 		this.torique = tor;
 	}
 	
+	public ArrayList<Direction> lookAt(String param,int x, int y){
+		ArrayList<Direction> listeDir = new ArrayList<Direction>();
+		if(param == "vide"){
+			for (Direction d : Direction.values()){		
+				//regarde la case si vide add la liste
+				if(this.agents[x][y] == null)
+					listeDir.add(d);
+			}
+		}else if(param == "poisson"){
+			for (Direction d : Direction.values()){		
+				//regarde la case si vide add la liste
+				if(this.agents[x][y] instanceof Fish)
+					listeDir.add(d);
+			}
+		}
+		return listeDir;
+	}
+	
+
 	
 }

@@ -15,11 +15,14 @@ public class Fenetre extends JFrame{
 		this.setSize(c.cSizeX, c.cSizeY);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		       
-	    this.add(c); 
 		
+		
+	    this.add(c); 
+	    		
 	    this.setVisible(true);
 	
 	}
+	
+	
 		
 }

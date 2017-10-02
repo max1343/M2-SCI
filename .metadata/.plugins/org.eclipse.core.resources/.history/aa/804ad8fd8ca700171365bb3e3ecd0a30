@@ -1,0 +1,19 @@
+package modele;
+
+public abstract class Action {
+
+	public void move(int x, int y, Agent a){
+		Environnement env = a.getEnv();
+		if (x <0)
+			x = env.width - 1;
+		if (y<0)
+			y = env.height - 1;
+				
+		a.getEnv().deleteBall(a);
+		a.setPosX(x % env.width);
+		a.setPosY(y % env.height);
+		a.getEnv().setBall(a);
+	}
+	
+	
+}
