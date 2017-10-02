@@ -7,18 +7,18 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import modele.Agent;
-import modele.Environnement;
-import particules.AgentParticule;
+import model.Agent;
+import model.Environment;
+import particles.AgentParticles;
 
 public class CanvasGrille extends Canvas implements Observer{
-	private Environnement e;
+	private Environment e;
 	private ArrayList<Agent> listeAgents;
 	public boolean grid;
 	public int cSizeX, cSizeY;
 	private int type;
 	
-	public CanvasGrille(Environnement env){
+	public CanvasGrille(Environment env){
 		this.e = env;
 		this.setSize(cSizeX, cSizeY);
 		if(type == 2) 
@@ -64,12 +64,12 @@ public class CanvasGrille extends Canvas implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		this.setEnv((Environnement) arg);
+		this.setEnv((Environment) arg);
 		repaint();
 	}
 	
 	
-	public void setEnv(Environnement e){
+	public void setEnv(Environment e){
 		this.e = e;
 		
 	}

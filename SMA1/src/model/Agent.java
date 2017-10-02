@@ -1,4 +1,4 @@
-package modele;
+package model;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -34,20 +34,18 @@ public abstract class Agent {
 	
 	protected int posX;
 	protected int posY;
-	private Environnement env;
+	private Environment env;
 	private HashMap<String,Action> actions;
 	protected Color couleur;
 	public boolean trace;
 	
-	public Agent(int posX, int posY, Color c, Environnement e, boolean trace){
+	public Agent(int posX, int posY, Color c, Environment e, boolean trace){
 		this.posX = posX;
 		this.posY = posY;
 		this.couleur = c;
 		this.env = e;
 		
 		this.trace = trace;
-			
-		this.env = env;
 	}
 	
 	public abstract void decide();
@@ -80,7 +78,7 @@ public abstract class Agent {
 		this.couleur = couleur;
 	}
 	
-	public Environnement getEnv(){
+	public Environment getEnv(){
 		return this.env;
 	}
 }

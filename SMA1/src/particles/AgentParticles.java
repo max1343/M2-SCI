@@ -1,17 +1,17 @@
-package particules;
+package particles;
 
 import java.awt.Color;
 import java.util.Random;
 
-import modele.Agent;
-import modele.Environnement;
+import model.Agent;
+import model.Environment;
 
-public class AgentParticule extends Agent{
+public class AgentParticles extends Agent{
 	private int  pasX, pasY;
-	private Environnement env;
+	private Environment env;
 	public boolean trace;
 	
-	public AgentParticule(Environnement env, int seed, boolean trace){
+	public AgentParticles(Environment env, int seed, boolean trace){
 		super(0,0,Color.gray,env,trace);
 		int eX = env.height;
 		int eY = env.width;
@@ -49,7 +49,7 @@ public class AgentParticule extends Agent{
 			}
 			else{
 				if(env.hasAgentAtPosition(regardX, regardY)){
-					action1((AgentParticule) env.getAgentAtPosition(regardX, regardY));
+					action1((AgentParticles) env.getAgentAtPosition(regardX, regardY));
 				}
 				else
 					action2();
@@ -60,7 +60,7 @@ public class AgentParticule extends Agent{
 	}
 	
 	
-	public void action1(AgentParticule a){
+	public void action1(AgentParticles a){
 		int pasXi = pasX;
 		int pasYi = pasY;
 		pasX = a.getPasX();

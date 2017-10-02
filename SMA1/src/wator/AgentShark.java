@@ -5,54 +5,46 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import modele.Action;
-import modele.Agent;
-import modele.Environnement;
+import model.Action;
+import model.Agent;
 
-public class Shark extends Agent {
+public class AgentShark extends Agent {
 	private int sharkBreedTime, countSharkBreedTime;
 	private Color couleur;
 	private int sharkStarveTime, countSharkStarveTime;
 	private Action ac;
-	private int seed;
 
-	public Shark(int posX, int posY, int sharkBreedTime, Color couleur, int sharkStarveTime,boolean trace,Environnement env,int seed,boolean child){
+	public AgentShark(int posX, int posY, int sharkBreedTime, Color couleur, int sharkStarveTime,boolean trace,EnvironmentWator env){
 		super(posX, posY,couleur,env,trace);
 		this.sharkBreedTime = sharkBreedTime;
 		this.countSharkBreedTime = sharkBreedTime;
 		this.sharkStarveTime = sharkStarveTime;
 		this.countSharkStarveTime = sharkStarveTime;
 		this.couleur = couleur;
-		this.seed = seed;
-		
-		if (!child){
-			Random rnd = new Random(seed);
-			this.posX = rnd.nextInt(env.height - 1); 
-			this.posY = rnd.nextInt(env.width - 1); 
-		}
+
 	}	
 
 	@Override
 	public void decide() {
-		ArrayList<Direction> ad = this.getEnv().lookAt("poisson",this.posX, this.posY);
+		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("poisson",this.posX, this.posY);
 		if(ad != null){
 			Collections.shuffle(ad);
 			ac.eat(ad.get(0).getX(), ad.get(0).getY(), this);
 			this.countSharkStarveTime = sharkStarveTime;
 			if(countSharkBreedTime == 0){
-				Shark k = new Shark(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace,  this.getEnv(), seed, true);
+				AgentShark k = new AgentShark(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace, (EnvironmentWator) getEnv());
 				this.getEnv().setBall((Agent) k);
 				countSharkBreedTime = sharkBreedTime;
 			}else
 				countSharkBreedTime--;
 		}else{
 			
-			ad = this.getEnv().lookAt("vide",this.posX,this.posY);
+			ad = ((EnvironmentWator) getEnv()).lookAt("vide",this.posX,this.posY);
 			if(ad != null){
 				Collections.shuffle(ad);
 				ac.move(ad.get(0).getX(),ad.get(0).getY(), this);
 				if(countSharkBreedTime == 0){
-					Shark k = new Shark(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace,  this.getEnv(), seed, true);
+					AgentShark k = new AgentShark(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace, (EnvironmentWator) getEnv());
 					this.getEnv().setBall((Agent) k);
 					countSharkBreedTime = sharkBreedTime;
 				}else
