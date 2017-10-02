@@ -1,9 +1,10 @@
 package model;
 
-public abstract class Action {
+public class Action {
 
 	public void move(int x, int y, Agent a){
 		Environment env = a.getEnv();
+
 		if ((a.getPosX() + x) < 0)
 			x = env.width - 1;
 		if ((a.getPosY() + y) < 0)

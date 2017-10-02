@@ -27,12 +27,13 @@ public class AgentShark extends Agent {
 	@Override
 	public void decide() {
 		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("poisson",this.posX, this.posY);
-		if(ad != null){
+		if(!ad.isEmpty()){
 			Collections.shuffle(ad);
-			ac.eat(ad.get(0).getX(), ad.get(0).getY(), this);
+			Direction d = ad.get(0);
+			ac.eat(d.getX(), d.getY(), this);
 			this.countSharkStarveTime = sharkStarveTime;
 			if(countSharkBreedTime == 0){
-				AgentShark k = new AgentShark(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace, (EnvironmentWator) getEnv());
+				AgentShark k = new AgentShark(this.posX - d.getX(), this.posY - d.getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace, (EnvironmentWator) getEnv());
 				this.getEnv().setBall((Agent) k);
 				countSharkBreedTime = sharkBreedTime;
 			}else
@@ -40,11 +41,12 @@ public class AgentShark extends Agent {
 		}else{
 			
 			ad = ((EnvironmentWator) getEnv()).lookAt("vide",this.posX,this.posY);
-			if(ad != null){
+			if(!ad.isEmpty()){
 				Collections.shuffle(ad);
-				ac.move(ad.get(0).getX(),ad.get(0).getY(), this);
+				Direction d = ad.get(0);
+				ac.move(d.getX(),d.getY(), this);
 				if(countSharkBreedTime == 0){
-					AgentShark k = new AgentShark(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace, (EnvironmentWator) getEnv());
+					AgentShark k = new AgentShark(this.posX - d.getX(), this.posY - d.getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace, (EnvironmentWator) getEnv());
 					this.getEnv().setBall((Agent) k);
 					countSharkBreedTime = sharkBreedTime;
 				}else

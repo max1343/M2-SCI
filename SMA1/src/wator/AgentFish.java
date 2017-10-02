@@ -24,9 +24,10 @@ public class AgentFish extends Agent{
 	@Override
 	public void decide() {
 		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("vide",this.posX,this.posY);
-		if(ad != null){
+		if(!ad.isEmpty()){
 			Collections.shuffle(ad);
-			ac.move(ad.get(1).getX(),ad.get(1).getY(), this);
+			Direction d = ad.get(0);
+			ac.move(d.getX(),d.getY(), this);
 			if(countFishBreedTime == 0){
 				AgentFish f = new AgentFish(this.posX - ad.get(1).getX(), this.posY - ad.get(1).getY(), this.fishBreedTime, Color.green, getEnv(), super.trace);
 				getEnv().setBall((Agent) f);
