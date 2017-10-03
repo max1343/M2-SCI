@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="/home/m2ivi/brusc/Documents/Master2/M2-SCI/SMA1"/>
 		<item value="/home/m2ivi/brusc/Documents/Master2/M2-SCI"/>
 	</list>
 </section>

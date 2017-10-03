@@ -36,8 +36,8 @@ public abstract class Environment extends Observable {
 
 	public ArrayList<Agent> getAllBall() {
 		ArrayList<Agent> liste = new ArrayList<Agent>();
-		for(int i = 0; i<height; i++){
-			for(int j=0; j<width; j++){
+		for(int i = 0; i<width; i++){
+			for(int j=0; j<height; j++){
 				if(agents[i][j] != null){
 					liste.add(agents[i][j]);
 				}		

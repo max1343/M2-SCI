@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
 
+import wator.AgentFish;
+import wator.AgentShark;
+
 public abstract class SMA extends Observable {
 
 	private ArrayList<Agent> agents;
@@ -58,6 +61,18 @@ public abstract class SMA extends Observable {
 					setChanged();
 					notifyObservers(e);
 					Thread.sleep(200 *FPS);
+					ArrayList<Agent> la = e.getAllBall();
+					int cpf = 0;
+					int cps = 0;
+					for( Agent a : la){
+						if(a instanceof AgentFish){
+							cpf++;
+						}
+						if(a instanceof AgentShark)
+							cps++;
+					}
+					System.out.println("nb requin : "+cps);
+					System.out.println("nb poisson : "+cpf);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}	
@@ -69,12 +84,25 @@ public abstract class SMA extends Observable {
 						setChanged();
 						notifyObservers(e);
 						Thread.sleep(200 * FPS);
+						ArrayList<Agent> la = e.getAllBall();
+						int cpf = 0;
+						int cps = 0;
+						for( Agent a : la){
+							if(a instanceof AgentFish){
+								cpf++;
+							}
+							if(a instanceof AgentShark)
+								cps++;
+						}
+						System.out.println("Tick" + (nbTicks - i+1));
+						System.out.println("nb requin : "+cps);
+						System.out.println("nb poisson : "+cpf);
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+			}		
 		
-			}				
 	}	
 	
 	public abstract void firstRun();

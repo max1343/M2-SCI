@@ -10,8 +10,6 @@ import model.Environment;
 
 public class AgentFish extends Agent{
 	private int fishBreedTime, countFishBreedTime;
-	private Color couleur;
-	private int seed;
 	
 	public AgentFish(int posX, int posY, int fishBreedTime, Color couleur,EnvironmentWator env, boolean trace){
 		super(posX, posY,couleur,env,trace);
@@ -21,8 +19,8 @@ public class AgentFish extends Agent{
 
 	@Override
 	public void decide() {
-		System.out.println("DEBUG fish");
-		this.couleur = Color.BLUE;
+		//System.out.println("DEBUG fish");
+		setColor(Color.BLUE);
 		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("vide",this.posX,this.posY);
 		if(!ad.isEmpty()){
 			Collections.shuffle(ad);

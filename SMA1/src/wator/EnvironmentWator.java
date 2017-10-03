@@ -24,7 +24,6 @@ public class EnvironmentWator extends Environment {
 			}
 		}else if(param == "poisson"){
 			for (Direction d : Direction.values()){		
-				System.out.println(x + d.getX());
 				if(x + d.getX() < getWidth() && x + d.getX() >= 0 && y + d.getY() < getHeight() && y + d.getY() >= 0) {
 					if(getAgentAtPosition(x + d.getX(), y + d.getY()) instanceof AgentFish)
 						listeDir.add(d);

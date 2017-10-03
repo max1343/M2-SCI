@@ -9,7 +9,6 @@ import model.Agent;
 
 public class AgentShark extends Agent {
 	private int sharkBreedTime, countSharkBreedTime;
-	private Color couleur;
 	private int sharkStarveTime, countSharkStarveTime;
 
 	public AgentShark(int posX, int posY, int sharkBreedTime, Color couleur, int sharkStarveTime,boolean trace,EnvironmentWator env){
@@ -18,19 +17,19 @@ public class AgentShark extends Agent {
 		this.countSharkBreedTime = sharkBreedTime;
 		this.sharkStarveTime = sharkStarveTime;
 		this.countSharkStarveTime = sharkStarveTime;
-		this.couleur = couleur;
-
 	}	
 
 	@Override
 	public void decide() {
-		System.out.println("DEBUG shark");
-		this.couleur = Color.RED;
-		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("poisson",this.posX, this.posY);
+	//	System.out.println("DEBUG shark");
+		setColor(Color.RED);
+		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("poisson",posX, posY);
 		if(!ad.isEmpty()){
 			Collections.shuffle(ad);
 			Direction d = ad.get(0);
 			eat(d.getX(), d.getY());
+			System.out.println("count" + countSharkStarveTime);
+
 			this.countSharkStarveTime = sharkStarveTime;
 			if(countSharkBreedTime == 0){
 				AgentShark k = new AgentShark(this.posX - d.getX(), this.posY - d.getY(), this.sharkBreedTime, Color.PINK, this.sharkStarveTime, super.trace, (EnvironmentWator) getEnv());
