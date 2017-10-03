@@ -14,7 +14,7 @@ public abstract class Environment extends Observable {
 	public Environment(int height, int width) {
 		this.height = height;
 		this.width = width;
-		agents = new Agent[height][width];
+		agents = new Agent[width][height];
 	}
 
 	public boolean hasAgentAtPosition(int x, int y){
@@ -50,4 +50,11 @@ public abstract class Environment extends Observable {
 		this.torique = tor;
 	}
 	
+	public int getWidth() {
+		return this.width;
+	}
+	
+	public int getHeight() {
+		return this.height;
+	}
 }

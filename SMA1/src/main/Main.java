@@ -27,8 +27,6 @@ public class Main {
 	static InputStream input = null;
 	static Environment env;	
 	static CanvasGrille c; 
-	ArrayList<Agent> truc = new ArrayList<Agent>();
-	Agent a;
 	static SMA sma;
 	
 	public static void main(String[] args) {

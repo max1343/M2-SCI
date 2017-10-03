@@ -35,7 +35,7 @@ public class SMAWator extends SMA{
 			posX = rnd.nextInt(e.height - 1); 
 			posY = rnd.nextInt(e.width - 1); 
 						
-			af = new AgentFish(posX,posY,fishBreedTime,Color.BLUE,getEnvironnement(), trace);
+			af = new AgentFish(posX,posY,fishBreedTime,Color.BLUE,(EnvironmentWator) getEnvironnement(), trace);
 			fishes.add(af);
 			e.setBall(af);
 			seed++;
@@ -45,7 +45,7 @@ public class SMAWator extends SMA{
 			posX = rnd.nextInt(e.height - 1); 
 			posY = rnd.nextInt(e.width - 1);
 			
-			as = new AgentShark(posX,posY,sharkBreedTime,Color.BLUE,4,trace, (EnvironmentWator) getEnvironnement());
+			as = new AgentShark(posX,posY,sharkBreedTime,Color.RED,sharkStarveTime,trace, (EnvironmentWator) getEnvironnement());
 			sharks.add(as);
 			e.setBall(as);
 			seed++;

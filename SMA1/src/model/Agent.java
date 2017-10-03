@@ -35,7 +35,6 @@ public abstract class Agent {
 	protected int posX;
 	protected int posY;
 	private Environment env;
-	private HashMap<String,Action> actions;
 	protected Color couleur;
 	public boolean trace;
 	
@@ -49,6 +48,19 @@ public abstract class Agent {
 	}
 	
 	public abstract void decide();
+	
+	public void move(int x, int y){
+		if ((getPosX() + x) < 0)
+			x = env.width - 1;
+		if ((getPosY() + y) < 0)
+			y = env.height - 1;
+				
+		getEnv().deleteBall(this);
+		setPosX((getPosX() + x) % env.width);
+		setPosY((getPosY() + y) % env.height);
+		getEnv().setBall(this);
+	}
+	
 	
 	public int getPosX() {
 		return posX;

@@ -21,16 +21,16 @@ public class CanvasGrille extends Canvas implements Observer{
 	public CanvasGrille(Environment env){
 		this.e = env;
 		this.setSize(cSizeX, cSizeY);
-		if(type == 2) 
+		//if(type == 2) 
 			this.setBackground(Color.CYAN);
 	}
 	
 	
 	public void paint(Graphics g){
-		if(type==2)
+		/** if(type==2)
 			g.setColor(Color.WHITE);
 		else
-			g.setColor(Color.BLACK);
+			g.setColor(Color.BLACK); **/
 		
 		if(this.grid == true){
 			int x1 = this.getWidth()/e.height;

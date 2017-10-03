@@ -8,7 +8,7 @@ public abstract class SMA extends Observable {
 
 	private ArrayList<Agent> agents;
 	protected Environment e;
-	public static int FPS;
+	public static int FPS = 1;
 	public int nbTicks;
 	public String scheduling;
 	public boolean trace;
@@ -23,8 +23,9 @@ public abstract class SMA extends Observable {
 		this.nbTicks = nbTicks;
 	}
 	
-	public void schedule(){
+	public void schedule() throws InterruptedException{
 		rand = 0;
+		agents = e.getAllBall();
 		nb = agents.size();
 		if(scheduling.equals("sequentiel")){
 			for(Agent ag : agents){
@@ -53,7 +54,6 @@ public abstract class SMA extends Observable {
 					idTick++;
 					if(this.trace)
 						System.out.println("Tick" + idTick);
-					agents = e.getAllBall();
 					schedule();
 					setChanged();
 					notifyObservers(e);
@@ -68,7 +68,7 @@ public abstract class SMA extends Observable {
 						schedule();
 						setChanged();
 						notifyObservers(e);
-						Thread.sleep(500 * FPS);
+						Thread.sleep(200 * FPS);
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
