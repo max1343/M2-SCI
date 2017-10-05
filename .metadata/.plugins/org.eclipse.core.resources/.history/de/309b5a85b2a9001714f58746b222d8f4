@@ -1,0 +1,33 @@
+package particles;
+
+import java.util.ArrayList;
+
+import model.Agent.Direction;
+import model.Environment;
+import model.SMA;
+import wator.AgentFish;
+import wator.AgentShark;
+
+public class SMAParticles extends SMA{
+	private ArrayList<AgentParticles> particules;
+	private AgentParticles ap;
+	private int nbParticules;
+	private int seed;
+	private int posX, posY;
+	private Direction dir;
+	private int cpf = 0, cps = 0;
+	
+	
+	
+	public SMAParticles(Environment e, boolean trace, String scheduling, int nbTicks) {
+		super(e, trace, scheduling, nbTicks);
+		
+	}
+
+	@Override
+	public void firstRun() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

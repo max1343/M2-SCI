@@ -24,6 +24,7 @@ public class SMAWator extends SMA{
 		this.fishBreedTime = fishBreedTime;
 		this.sharkBreedTime = sharkBreedTime;
 		this.sharkStarveTime = sharkStarveTime;
+		this.seed = seed;
 	}
 	
 	@Override

@@ -1,0 +1,54 @@
+package particles;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Random;
+
+import model.Agent.Direction;
+import model.Environment;
+import model.SMA;
+import wator.AgentFish;
+import wator.AgentShark;
+import wator.EnvironmentWator;
+
+public class SMAParticles extends SMA{
+	private ArrayList<AgentParticles> particules;
+	private int nbParticules;
+	private int seed;
+	private AgentParticles ap;
+	private int posX, posY;
+	private Direction dir;
+	private int cpf = 0, cps = 0;
+	
+	
+	
+	public SMAParticles(Environment e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart) {
+		super(e, trace, scheduling, nbTicks);
+		this.nbParticules = nbPart;
+		this.seed = seed;
+	}
+
+	@Override
+	public void firstRun() {
+		// TODO Auto-generated method stub
+		Random rnd = new Random(seed);
+		particules = new ArrayList<AgentParticles>();
+		Direction dir;
+		int pasX; 
+		int pasY; 
+		for(int i =1;i<=nbParticules;i++){
+			posX = rnd.nextInt(e.height - 1); 
+			posY = rnd.nextInt(e.width - 1); 
+			do{
+				pasX =  rnd.nextInt(2) - 1;
+				pasY =  rnd.nextInt(2) - 1; 
+			}while(pasY == 0 && pasX == 0);
+			ap = new AgentParticles(posX, posY, pasX, pasY, Color.gray, e, trace);
+			particules.add(ap);
+			e.setBall(ap);
+		}
+		run();
+		
+	}
+
+}

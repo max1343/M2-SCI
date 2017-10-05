@@ -8,48 +8,38 @@ import model.Environment;
 
 public class AgentParticles extends Agent{
 	private int  pasX, pasY;
-	private Environment env;
-	public boolean trace;
-	
-	public AgentParticles(Environment env, int seed, boolean trace){
-		super(0,0,Color.gray,env,trace);
-		int eX = env.height;
-		int eY = env.width;
-		this.trace = trace;
-		
-		Random rnd = new Random(seed);
-		
-		this.posX = rnd.nextInt(eX - 1); 
-		this.posY = rnd.nextInt(eY - 1); 
-		this.pasX = rnd.nextInt(2) - 1; 
-		this.pasY = rnd.nextInt(2) - 1; 
-		this.env = env;
+	public boolean trace;	
+
+	public AgentParticles(int posX, int posY, int pasX, int pasY, Color couleur, Environment e, boolean trace) {
+		super(posX,posY,couleur,e,trace);
+		this.pasX = pasX;
+		this.pasY = pasY;
 	}
-	
+
 
 	public void decide(){
 		int regardX, regardY;
 		regardX = posX + pasX;
 		regardY = posY + pasY;
 		
-		if(regardX < 0 || regardX >= env.height){
-			if(regardY < 0 || regardY >= env.width){
+		if(regardX < 0 || regardX >= getEnv().height){
+			if(regardY < 0 || regardY >= getEnv().width){
 				actionAngle();
 			}
 			else
 				action3();
 		}
 		else{
-			if(regardY < 0 || regardY >= env.width){
-				if(regardX < 0 || regardX >= env.width){
+			if(regardY < 0 || regardY >= getEnv().width){
+				if(regardX < 0 || regardX >= getEnv().width){
 					actionAngle();	
 
 				}
 				action4();
 			}
 			else{
-				if(env.hasAgentAtPosition(regardX, regardY)){
-					action1((AgentParticles) env.getAgentAtPosition(regardX, regardY));
+				if(getEnv().hasAgentAtPosition(regardX, regardY)){
+					action1((AgentParticles) getEnv().getAgentAtPosition(regardX, regardY));
 				}
 				else
 					action2();
@@ -73,84 +63,84 @@ public class AgentParticles extends Agent{
 	}
 	
 	public void action2(){
-		env.deleteBall(this);
+		getEnv().deleteBall(this);
 		posX += pasX;
 		posY += pasY;
-		env.setBall(this);
+		getEnv().setBall(this);
 		//System.out.println("bougé");
 	}
 	
 	public void action3(){
-		if(!env.torique){
+		if(!getEnv().torique){
 			pasX *= -1;
 			//System.out.println("collision mur");
 		}
 		else{
-			if(posX + pasX > (env.height-1)){
-				env.deleteBall(this);
+			if(posX + pasX > (getEnv().height-1)){
+				getEnv().deleteBall(this);
 				posX = 0;
 				posY += pasY;
-				env.setBall(this);
+				getEnv().setBall(this);
 			//	System.out.println("bougé");
 			}
 			if(posX + pasX < 0){
-				env.deleteBall(this);
-				posX = env.height -1;
+				getEnv().deleteBall(this);
+				posX = getEnv().height -1;
 				posY += pasY;
-				env.setBall(this);
+				getEnv().setBall(this);
 			//	System.out.println("bougé");
 			}
 		}
 	}
 	
 	public void action4(){
-		if(!env.torique){
+		if(!getEnv().torique){
 			pasY *= -1;
 			//System.out.println("collision mur");
 		}
 		else{
-			if(posY + pasY > (env.width-1)){
-				env.deleteBall(this);
+			if(posY + pasY > (getEnv().width-1)){
+				getEnv().deleteBall(this);
 				posY = 0;
 				posX += pasX;
-				env.setBall(this);
+				getEnv().setBall(this);
 			//	System.out.println("bougé");
 			}
 			if(posY + pasY < 0){
-				env.deleteBall(this);
-				posY = env.width -1;
+				getEnv().deleteBall(this);
+				posY = getEnv().width -1;
 				posX += pasX;
-				env.setBall(this);
+				getEnv().setBall(this);
 			//	System.out.println("bougé");
 			}
 		}
 	}
 	
 	public void actionAngle(){
-		if(!env.torique){
+		if(!getEnv().torique){
 			pasY *= -1;
 			pasX *= -1;
 		//	System.out.println("collision mur");
 		}
 		else{
-			env.deleteBall(this);
+			getEnv().deleteBall(this);
 			if(posY == 0 && posX == 0){
-				posY = env.width - 1;
-				posX = env.height - 1;
+				posY = getEnv().width - 1;
+				posX = getEnv().height - 1;
 			}
-			if(posX == 0 && posY == (env.width-1)){
+			if(posX == 0 && posY == (getEnv().width-1)){
 				posY = 0;
-				posX = env.height-1;
+				posX = getEnv().height-1;
 			}
-			if(posX == (env.height - 1) && posY == (env.width-1)){
+			if(posX == (getEnv().height - 1) && posY == (getEnv().width-1)){
 				posY = 0;
 				posX = 0;
 			}
-			if(posX == (env.height - 1) && posY == 0){
-				posY = env.width-1;
+			if(posX == (getEnv().height - 1) && posY == 0){
+				posY = getEnv().width-1;
 				posX = 0;
 			}
-			env.setBall(this);
+			getEnv().setBall(this);
 		//	System.out.println("bouge angle");
 		}
 	}

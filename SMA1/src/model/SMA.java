@@ -1,11 +1,16 @@
 package model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
 
+import org.omg.CORBA.SetOverrideType;
+
+import particles.AgentParticles;
 import wator.AgentFish;
 import wator.AgentShark;
+import wator.SMAWator;
 
 public abstract class SMA extends Observable {
 
@@ -17,6 +22,7 @@ public abstract class SMA extends Observable {
 	public boolean trace;
 	private int idTick;
 	private int rand, nb;
+	private String type;
 	
 	public SMA(Environment e, boolean trace, String scheduling, int nbTicks){
 		this.e = e;
@@ -64,15 +70,24 @@ public abstract class SMA extends Observable {
 					ArrayList<Agent> la = e.getAllBall();
 					int cpf = 0;
 					int cps = 0;
+					int cpp = 0;
 					for( Agent a : la){
-						if(a instanceof AgentFish){
+						if(a instanceof AgentFish)
 							cpf++;
-						}
 						if(a instanceof AgentShark)
 							cps++;
+						if(a instanceof AgentParticles)
+							if(a.couleur == Color.gray)
+								cpp++;
 					}
-					System.out.println("nb requin : "+cps);
-					System.out.println("nb poisson : "+cpf);
+					if(this.trace){
+						if(this.type.equals("fishes")){
+							System.out.println("nb requin : "+cps);
+							System.out.println("nb poisson : "+cpf);
+						}
+						if(this.type.equals("particules"))
+							System.out.println("particules non collisionées : "+cpp);
+					}
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}	
@@ -87,16 +102,27 @@ public abstract class SMA extends Observable {
 						ArrayList<Agent> la = e.getAllBall();
 						int cpf = 0;
 						int cps = 0;
+						int cpp = 0;
 						for( Agent a : la){
 							if(a instanceof AgentFish){
 								cpf++;
 							}
 							if(a instanceof AgentShark)
 								cps++;
+							if(a instanceof AgentParticles){
+								if(a.couleur == Color.gray)
+									cpp++;
+							}
 						}
-						System.out.println("Tick" + (nbTicks - i+1));
-						System.out.println("nb requin : "+cps);
-						System.out.println("nb poisson : "+cpf);
+						if(trace){
+							System.out.println("Tick" + (nbTicks - i+1));
+							if(this.type.equals("fishes")){
+								System.out.println("nb requin : "+cps);
+								System.out.println("nb poisson : "+cpf);
+							}
+							if(this.type.equals("particules"))
+								System.out.println("particules non collisionnées : "+cpp);
+						}
 					} catch (InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -110,4 +136,9 @@ public abstract class SMA extends Observable {
 	public Environment getEnvironnement() {
 		return this.e;
 	}
+	
+	public void setType(String type){
+		this.type = type;
+	}
+	
 }

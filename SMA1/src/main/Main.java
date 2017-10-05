@@ -8,6 +8,8 @@ import java.util.Properties;
 import model.Agent;
 import model.Environment;
 import model.SMA;
+import particles.EnvironmentParticles;
+import particles.SMAParticles;
 import vue.CanvasGrille;
 import vue.Fenetre;
 import wator.EnvironmentWator;
@@ -37,7 +39,7 @@ public class Main {
 			input = new FileInputStream("src/constant.properties");
 			prop.load(input);
 			
-			// récupération et traitement des données du fichiers
+			// recuperation et traitement des donnees du fichier
 			if(Integer.parseInt(prop.getProperty("db.seed")) == 0){
 				 seed = (int) Math.round(Math.random()*65000); 
 			}else
@@ -47,13 +49,18 @@ public class Main {
 			createCanvas();
 			
 			switch(prop.getProperty("db.type")) {
-				case "particles" : 	//sma = new SMAParticles();
-								   	break;								   
+				case "particules" : createParticlesEnvironment();
+									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbPart")));
+								   	c.setType(1);
+								   	sma.setType("particules");
+									break;								   
 				case "fishes": 	   	createWatorEnvironment();
 									sma = new SMAWator((EnvironmentWator) env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed, 
 						Integer.parseInt(prop.getProperty("db.nbFish")), Integer.parseInt(prop.getProperty("db.nbShark")), Integer.parseInt(prop.getProperty("db.fishBreedTime")),
 						Integer.parseInt(prop.getProperty("db.sharkBreedTime")), Integer.parseInt(prop.getProperty("db.sharkStarveTime")));
-							       break;
+							      c.setType(2);
+							      sma.setType("fishes");
+									break;
 			}
 			
 			Fenetre fen = new Fenetre(c);
@@ -83,6 +90,13 @@ public class Main {
 		env = new EnvironmentWator(gridSizeX,gridSizeY);
 		env.setTorique(Boolean.valueOf(prop.getProperty("db.torus")));
 
+	}
+	
+	public static void createParticlesEnvironment(){
+		int gridSizeX = Integer.parseInt(prop.getProperty("db.gridSizeX"));
+		int gridSizeY = Integer.parseInt(prop.getProperty("db.gridSizeY"));
+		env = new EnvironmentParticles(gridSizeX,gridSizeY);
+		env.setTorique(Boolean.valueOf(prop.getProperty("db.torus")));
 	}
 	
 	public static void createCanvas() {
