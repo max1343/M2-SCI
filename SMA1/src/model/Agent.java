@@ -30,6 +30,14 @@ public abstract class Agent {
 		public int getY(){
 			return this.pasY;
 		}
+		
+		public static final Direction[] VALUES = values();
+		  private static final int SIZE = VALUES.length;
+		  private static final Random RANDOM = new Random();
+
+		  public static Direction getRandomDir()  {
+		    return VALUES[RANDOM.nextInt(SIZE)];
+		  }		
 	};
 	
 	protected int posX;
@@ -37,6 +45,7 @@ public abstract class Agent {
 	private Environment env;
 	protected Color couleur;
 	public boolean trace;
+	private int dijkstra ;
 	
 	public Agent(int posX, int posY, Color c, Environment e, boolean trace){
 		this.posX = posX;
@@ -92,5 +101,13 @@ public abstract class Agent {
 	
 	public Environment getEnv(){
 		return this.env;
+	}
+
+	public int getDijkstra() {
+		return dijkstra;
+	}
+
+	public void setDijkstra(int dijkstra) {
+		this.dijkstra = dijkstra;
 	}
 }

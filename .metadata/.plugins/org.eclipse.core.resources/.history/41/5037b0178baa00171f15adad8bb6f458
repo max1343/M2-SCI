@@ -1,0 +1,20 @@
+package pacman;
+
+import java.awt.Color;
+
+import model.Agent;
+
+public class AgentMur extends Agent {
+	
+	public AgentMur(int posX, int posY) {
+		this.posX = posX;
+		this.posY = posY;
+		this.couleur = Color.BLACK;
+	}
+
+	@Override
+	public void decide() {
+		// TODO Auto-generated method stub
+		
+	}
+}

@@ -1,3 +1,7 @@
 1506956565681	Delete element
 1506960533779	Delete element
 1507041932172	Rename type 'Avatar'
+1507291624928	Encapsulate field 'pasX'
+1507291634214	Encapsulate field 'pasY'
+1507292017533	Rename type 'AgentMur'
+1507296429420	Encapsulate field 'dijkstra'

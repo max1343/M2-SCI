@@ -1,0 +1,21 @@
+package pacman;
+
+import java.awt.Color;
+
+import model.Agent;
+
+public class AgentMur extends Agent {
+	
+	public AgentMur(int posX, int posY, Environment env, boolean trace) {
+		super(posX,posY,Color.black,env, trace);
+		this.posX = posX;
+		this.posY = posY;
+		this.couleur = Color.BLACK;
+	}
+
+	@Override
+	public void decide() {
+		// TODO Auto-generated method stub
+		
+	}
+}

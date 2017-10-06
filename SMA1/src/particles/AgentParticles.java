@@ -8,16 +8,18 @@ import model.Environment;
 
 public class AgentParticles extends Agent{
 	private int  pasX, pasY;
-	public boolean trace;	
+	public boolean trace;
+	private Direction dir;
 
-	public AgentParticles(int posX, int posY, int pasX, int pasY, Color couleur, Environment e, boolean trace) {
+	public AgentParticles(int posX, int posY, Direction dir, Color couleur, Environment e, boolean trace) {
 		super(posX,posY,couleur,e,trace);
-		this.pasX = pasX;
-		this.pasY = pasY;
+		this.dir = dir;
+		this.pasX = dir.getX();
+		this.pasY = dir.getY();	
 	}
 
 
-	public void decide(){
+	public void decide(){	
 		int regardX, regardY;
 		regardX = posX + pasX;
 		regardY = posY + pasY;
@@ -83,7 +85,8 @@ public class AgentParticles extends Agent{
 				getEnv().setBall(this);
 			//	System.out.println("bougé");
 			}
-			if(posX + pasX < 0){
+			if(posX + pasX < 0){		this.pasY = pasY;		
+
 				getEnv().deleteBall(this);
 				posX = getEnv().height -1;
 				posY += pasY;

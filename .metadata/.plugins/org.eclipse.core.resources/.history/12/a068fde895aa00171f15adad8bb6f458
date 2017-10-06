@@ -1,0 +1,188 @@
+package particles;
+
+import java.awt.Color;
+import java.util.Random;
+
+import model.Agent;
+import model.Environment;
+
+public class AgentParticles extends Agent{
+	private int  pasX, pasY;
+	public boolean trace;
+	private Direction dir;
+
+	public AgentParticles(int posX, int posY, Direction dir, Color couleur, Environment e, boolean trace) {
+		super(posX,posY,couleur,e,trace);
+		//this.pasX = pasX;
+		//this.pasY = pasY;	
+		this.dir = dir;
+	}
+
+
+	public void decide(){	
+		int regardX, regardY;
+		regardX = posX + pasX;
+		regardY = posY + pasY;
+		
+		if(regardX < 0 || regardX >= getEnv().height){
+			if(regardY < 0 || regardY >= getEnv().width){
+				actionAngle();
+			}
+			else
+				action3();
+		}
+		else{
+			if(regardY < 0 || regardY >= getEnv().width){
+				if(regardX < 0 || regardX >= getEnv().width){
+					actionAngle();	
+
+				}
+				action4();
+			}
+			else{
+				if(getEnv().hasAgentAtPosition(regardX, regardY)){
+					action1((AgentParticles) getEnv().getAgentAtPosition(regardX, regardY));
+				}
+				else
+					action2();
+			}
+		}
+		if(trace)
+			System.out.println("Agent couleur: " + super.couleur);
+	}
+	
+	
+	public void action1(AgentParticles a){
+		int pasXi = pasX;
+		int pasYi = pasY;
+		pasX = a.getPasX();
+		a.setPasX(pasXi);
+		pasY = a.getPasY();
+		a.setPasY(pasYi);
+		a.couleur = Color.red;
+		this.couleur = Color.red;
+		//System.out.println("collision");
+	}
+	
+	public void action2(){
+		getEnv().deleteBall(this);
+		posX += pasX;
+		posY += pasY;
+		getEnv().setBall(this);
+		//System.out.println("bougé");
+	}
+	
+	public void action3(){
+		if(!getEnv().torique){
+			pasX *= -1;
+			//System.out.println("collision mur");
+		}
+		else{
+			if(posX + pasX > (getEnv().height-1)){
+				getEnv().deleteBall(this);
+				posX = 0;
+				posY += pasY;
+				getEnv().setBall(this);
+			//	System.out.println("bougé");
+			}
+			if(posX + pasX < 0){		this.pasY = pasY;		
+
+				getEnv().deleteBall(this);
+				posX = getEnv().height -1;
+				posY += pasY;
+				getEnv().setBall(this);
+			//	System.out.println("bougé");
+			}
+		}
+	}
+	
+	public void action4(){
+		if(!getEnv().torique){
+			pasY *= -1;
+			//System.out.println("collision mur");
+		}
+		else{
+			if(posY + pasY > (getEnv().width-1)){
+				getEnv().deleteBall(this);
+				posY = 0;
+				posX += pasX;
+				getEnv().setBall(this);
+			//	System.out.println("bougé");
+			}
+			if(posY + pasY < 0){
+				getEnv().deleteBall(this);
+				posY = getEnv().width -1;
+				posX += pasX;
+				getEnv().setBall(this);
+			//	System.out.println("bougé");
+			}
+		}
+	}
+	
+	public void actionAngle(){
+		if(!getEnv().torique){
+			pasY *= -1;
+			pasX *= -1;
+		//	System.out.println("collision mur");
+		}
+		else{
+			getEnv().deleteBall(this);
+			if(posY == 0 && posX == 0){
+				posY = getEnv().width - 1;
+				posX = getEnv().height - 1;
+			}
+			if(posX == 0 && posY == (getEnv().width-1)){
+				posY = 0;
+				posX = getEnv().height-1;
+			}
+			if(posX == (getEnv().height - 1) && posY == (getEnv().width-1)){
+				posY = 0;
+				posX = 0;
+			}
+			if(posX == (getEnv().height - 1) && posY == 0){
+				posY = getEnv().width-1;
+				posX = 0;
+			}
+			getEnv().setBall(this);
+		//	System.out.println("bouge angle");
+		}
+	}
+	
+
+	
+	public int getPasX(){
+		return this.pasX;
+			
+		
+	}
+	
+	public void setPasX(int nPas){
+		this.pasX = nPas;
+	}
+	
+	public int getPasY(){
+		return this.pasY;
+	}
+	
+	public void setPasY(int nPas){
+		this.pasY = nPas;
+	}
+	
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+	
+	
+}

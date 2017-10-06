@@ -1,0 +1,104 @@
+package model;
+
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Random;
+
+public abstract class Agent {
+	
+	public enum Direction{
+		Nord(0,1),
+		Sud(0,-1),
+		Est(1,0),
+		Ouest(-1,0),
+		NordEst(1,1),
+		NordOuest(-1,1),
+		SudEst(1,-1),
+		SudOuest(-1,-1);
+		
+		int pasX, pasY;
+		Direction(int pasX, int pasY){
+			this.pasX = pasX;
+			this.pasY = pasY;
+		}
+		
+		public int getX(){
+			return this.pasX;
+		}
+		
+		public int getY(){
+			return this.pasY;
+		}
+		
+		private static final Direction[] VALUES = values();
+		  private static final int SIZE = VALUES.length;
+		  private static final Random RANDOM = new Random();
+
+		  public static Direction getRandomDir()  {
+		    return VALUES[RANDOM.nextInt(SIZE)];
+		  }		
+	};
+	
+	protected int posX;
+	protected int posY;
+	private Environment env;
+	protected Color couleur;
+	public boolean trace;
+	
+	public Agent(int posX, int posY, Color c, Environment e, boolean trace){
+		this.posX = posX;
+		this.posY = posY;
+		this.couleur = c;
+		this.env = e;
+		
+		this.trace = trace;
+	}
+	
+	public abstract void decide();
+	
+	public void move(int x, int y){
+		if ((getPosX() + x) < 0)
+			x = env.width - 1;
+		if ((getPosY() + y) < 0)
+			y = env.height - 1;
+				
+		getEnv().deleteBall(this);
+		setPosX((getPosX() + x) % env.width);
+		setPosY((getPosY() + y) % env.height);
+		getEnv().setBall(this);
+	}
+	
+	
+	public int getPosX() {
+		return posX;
+	}
+
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+
+	public int getPosY() {
+		return posY;
+	}
+
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+
+	public Color getColor() {
+		return this.couleur;
+	}
+	
+	public void setColor(Color couleur) {
+		this.couleur = couleur;
+	}
+	
+	public Environment getEnv(){
+		return this.env;
+	}
+}

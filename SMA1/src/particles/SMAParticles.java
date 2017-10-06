@@ -2,6 +2,8 @@ package particles;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 import model.Agent.Direction;
@@ -30,16 +32,13 @@ public class SMAParticles extends SMA{
 		// TODO Auto-generated method stub
 		Random rnd = new Random(seed);
 		particules = new ArrayList<AgentParticles>();
-		int pasX; 
-		int pasY; 
+		Direction dir;
+		
 		for(int i =1;i<=nbParticules;i++){
 			posX = rnd.nextInt(e.height - 1); 
 			posY = rnd.nextInt(e.width - 1); 
-			do{
-				pasX =  rnd.nextInt(2) - 1;
-				pasY =  rnd.nextInt(2) - 1; 
-			}while(pasY == 0 && pasX == 0);
-			ap = new AgentParticles(posX, posY, pasX, pasY, Color.gray, e, trace);
+			dir = Direction.getRandomDir();
+			ap = new AgentParticles(posX, posY, dir, Color.gray, e, trace);
 			particules.add(ap);
 			e.setBall(ap);
 		}

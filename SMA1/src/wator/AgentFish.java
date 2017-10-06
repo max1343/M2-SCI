@@ -19,7 +19,6 @@ public class AgentFish extends Agent{
 
 	@Override
 	public void decide() {
-		//System.out.println("DEBUG fish");
 		setColor(Color.BLUE);
 		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("vide",this.posX,this.posY);
 		if(!ad.isEmpty()){

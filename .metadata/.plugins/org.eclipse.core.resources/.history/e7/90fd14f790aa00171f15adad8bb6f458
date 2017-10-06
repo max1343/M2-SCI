@@ -1,0 +1,35 @@
+package pacman;
+
+import java.util.ArrayList;
+
+import model.Environment;
+import model.SMA;
+import wator.AgentFish;
+import wator.AgentShark;
+
+public class SMAPacman extends SMA{
+	private ArrayList<AgentWall> walls;
+	private ArrayList<AgentHunter> hunters;
+	private AgentAvatar avatar;
+	
+	private int seed;
+	private int posX, posY, nbHunters, nbWalls;
+
+	public SMAPacman(EnvironmentPacman e, boolean trace, String scheduling, int nbTicks,int seed, int nbH, int nbW) {
+		super(e, trace, scheduling, nbTicks);
+		this.seed = seed;
+		this.nbHunters = nbH;
+		this.nbWalls = nbW;
+	}
+
+	@Override
+	public void firstRun() {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		run();
+	}
+
+}

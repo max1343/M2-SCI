@@ -8,6 +8,8 @@ import java.util.Properties;
 import model.Agent;
 import model.Environment;
 import model.SMA;
+import pacman.EnvironmentPacman;
+import pacman.SMAPacman;
 import particles.EnvironmentParticles;
 import particles.SMAParticles;
 import vue.CanvasGrille;
@@ -61,6 +63,8 @@ public class Main {
 							      c.setType(2);
 							      sma.setType("fishes");
 									break;
+				case "pacman": createPacmanEnvironment();
+								sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,Integer.parseInt(prop.getProperty("db.nbHunter")),Integer.parseInt(prop.getProperty("db.nbWall")));
 			}
 			
 			Fenetre fen = new Fenetre(c);
@@ -96,6 +100,13 @@ public class Main {
 		int gridSizeX = Integer.parseInt(prop.getProperty("db.gridSizeX"));
 		int gridSizeY = Integer.parseInt(prop.getProperty("db.gridSizeY"));
 		env = new EnvironmentParticles(gridSizeX,gridSizeY);
+		env.setTorique(Boolean.valueOf(prop.getProperty("db.torus")));
+	}
+	
+	public static void createPacmanEnvironment(){
+		int gridSizeX = Integer.parseInt(prop.getProperty("db.gridSizeX"));
+		int gridSizeY = Integer.parseInt(prop.getProperty("db.gridSizeY"));
+		env = new EnvironmentPacman(gridSizeX,gridSizeY);
 		env.setTorique(Boolean.valueOf(prop.getProperty("db.torus")));
 	}
 	

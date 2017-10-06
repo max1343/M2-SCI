@@ -1,0 +1,44 @@
+package pacman;
+
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import model.Agent;
+import model.Environment;
+
+public class AgentAvatar extends Agent implements KeyListener {
+	private pasX, pasY;
+	public AgentAvatar(int posX, int posY, Color c, Environment e, boolean trace) {
+		super(posX, posY, c, e, trace);
+		this.pasX = 0;
+		this.pasY=0;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		switch(e.getKeyCode()){
+		case VK_KP_DOWN : 
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void decide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
