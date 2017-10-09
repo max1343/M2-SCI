@@ -20,7 +20,7 @@ public class SMAParticles extends SMA{
 	private AgentParticles ap;
 	private int posX, posY;
 
-	
+
 	public SMAParticles(Environment e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart) {
 		super(e, trace, scheduling, nbTicks);
 		this.nbParticules = nbPart;
@@ -33,10 +33,10 @@ public class SMAParticles extends SMA{
 		Random rnd = new Random(seed);
 		particules = new ArrayList<AgentParticles>();
 		Direction dir;
-		
+
 		for(int i =1;i<=nbParticules;i++){
-			posX = rnd.nextInt(e.height - 1); 
-			posY = rnd.nextInt(e.width - 1); 
+			posX = rnd.nextInt(e.height - 1);
+			posY = rnd.nextInt(e.width - 1);
 			dir = Direction.getRandomDir();
 			ap = new AgentParticles(posX, posY, dir, Color.gray, e, trace);
 			particules.add(ap);
@@ -46,9 +46,10 @@ public class SMAParticles extends SMA{
 	}
 
 	@Override
-	public void doTrace() {
-		
-		
+	public void doTrace(int idTick) {
+		System.out.println("Tick" + idTick);
+		System.out.println("");
+
 	}
 
 }

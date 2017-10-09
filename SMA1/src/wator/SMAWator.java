@@ -16,7 +16,7 @@ public class SMAWator extends SMA{
 	private int seed;
 	private int posX, posY;
 	private int cpf = 0, cps = 0;
-	
+
 	public SMAWator(EnvironmentWator e, boolean trace, String scheduling, int nbTicks, int seed, int nbFish, int nbShark, int fishBreedTime, int sharkBreedTime, int sharkStarveTime) {
 		super(e, trace, scheduling, nbTicks);
 		this.nbFish = nbFish;
@@ -26,38 +26,38 @@ public class SMAWator extends SMA{
 		this.sharkStarveTime = sharkStarveTime;
 		this.seed = seed;
 	}
-	
+
 	@Override
 	public void firstRun() {
 		Random rnd = new Random(seed);
 		fishes = new ArrayList<AgentFish>();
 		sharks = new ArrayList<AgentShark>();
-		
+
 		for(int i =1;i<=nbFish;i++){
-			posX = rnd.nextInt(e.height - 1); 
-			posY = rnd.nextInt(e.width - 1); 
-						
+			posX = rnd.nextInt(e.height - 1);
+			posY = rnd.nextInt(e.width - 1);
+
 			af = new AgentFish(posX,posY,fishBreedTime,Color.BLUE,(EnvironmentWator) getEnvironnement(), trace);
 			fishes.add(af);
 			e.setBall(af);
 		}
-	
-		for(int i =1;i<=nbShark;i++){	
-			posX = rnd.nextInt(e.height - 1); 
+
+		for(int i =1;i<=nbShark;i++){
+			posX = rnd.nextInt(e.height - 1);
 			posY = rnd.nextInt(e.width - 1);
-			
+
 			as = new AgentShark(posX,posY,sharkBreedTime,Color.RED,sharkStarveTime,trace, (EnvironmentWator) getEnvironnement());
 			sharks.add(as);
 			e.setBall(as);
 		}
-		
+
 		run();
-	
+
 	}
 
 	@Override
-	public void doTrace() {
-		// TODO Auto-generated method stub
-		
+	public void doTrace(int idTick) {
+		System.out.println("Tick" + idTick);
+
 	}
 }

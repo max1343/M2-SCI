@@ -29,37 +29,36 @@ public class SMAPacman extends SMA{
 		Random rnd = new Random(seed);
 		walls = new ArrayList<AgentWall>();
 		hunters = new ArrayList<AgentHunter>();
-		
+
 		for(int i =1;i<=nbHunters;i++){
-			posX = rnd.nextInt(e.height - 1); 
-			posY = rnd.nextInt(e.width - 1); 
-						
+			posX = rnd.nextInt(e.height - 1);
+			posY = rnd.nextInt(e.width - 1);
+
 			ah = new AgentHunter(posX,posY,Color.RED,(EnvironmentPacman) getEnvironnement(),trace);
 			hunters.add(ah);
 			e.setBall(ah);
 		}
-	
-		for(int i =1;i<=nbWalls;i++){	
-			posX = rnd.nextInt(e.height - 1); 
+
+		for(int i =1;i<=nbWalls;i++){
+			posX = rnd.nextInt(e.height - 1);
 			posY = rnd.nextInt(e.width - 1);
-			
+
 			aw = new AgentWall(posX,posY, (EnvironmentPacman) getEnvironnement(),trace);
 			walls.add(aw);
 			e.setBall(aw);
 		}
-		
-		posX = rnd.nextInt(e.height - 1); 
+
+		posX = rnd.nextInt(e.height - 1);
 		posY = rnd.nextInt(e.width - 1);
 		avatar = new AgentAvatar(posX, posY, Color.blue, e, trace);
 		e.setBall(avatar);
-		
+
 		run();
 	}
 
 	@Override
-	public void doTrace() {
-		// TODO Auto-generated method stub
-		
+	public void doTrace(int idTick) {
+			System.out.println("Tick" + idTick);
 	}
 
 }

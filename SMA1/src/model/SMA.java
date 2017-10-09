@@ -24,15 +24,15 @@ public abstract class SMA extends Observable {
 	private int rand, nb;
 	private String type;
 	protected String exportTrace;
-	
+
 	public SMA(Environment e, boolean trace, String scheduling, int nbTicks){
 		this.e = e;
 		this.trace = trace;
-		this.idTick = 0;
+		this.idTick = 1;
 		this.scheduling = scheduling;
 		this.nbTicks = nbTicks;
 	}
-	
+
 	public void schedule() throws InterruptedException{
 		rand = 0;
 		agents = e.getAllBall();
@@ -55,102 +55,43 @@ public abstract class SMA extends Observable {
 			}
 		}
 	}
-	
+
 	public void run(){
 		agents = new ArrayList<Agent>();
-		if(nbTicks == 0)
-			while(true)
+			while(idTick != nbTicks)
 				try {
-					idTick++;
-					if(this.trace)
-						System.out.println("Tick" + idTick);
 					schedule();
 					setChanged();
 					notifyObservers("env");
+					if(this.trace)
+							doTrace(idTick);
+					idTick++;
 					Thread.sleep(200 *FPS);
-					ArrayList<Agent> la = e.getAllBall();
-					int cpf = 0;
-					int cps = 0;
-					int cpp = 0;
-					for( Agent a : la){
-						if(a instanceof AgentFish)
-							cpf++;
-						if(a instanceof AgentShark)
-							cps++;
-						if(a instanceof AgentParticles)
-							if(a.couleur == Color.gray)
-								cpp++;
-					}
-					if(this.trace){
-						if(this.type.equals("fishes")){
-							System.out.println("nb requin : "+cps);
-							System.out.println("nb poisson : "+cpf);
-						}
-						if(this.type.equals("particules"))
-							System.out.println("particules non collisionées : "+cpp);
-					}
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
-				}	
-		else
-			for(int i = nbTicks +1 ; i>0; i--){	
-				try {
-					agents = e.getAllBall();
-						schedule();
-						setChanged();
-						notifyObservers(e);
-						Thread.sleep(200 * FPS);
-						ArrayList<Agent> la = e.getAllBall();
-						int cpf = 0;
-						int cps = 0;
-						int cpp = 0;
-						for( Agent a : la){
-							if(a instanceof AgentFish){
-								cpf++;
-							}
-							if(a instanceof AgentShark)
-								cps++;
-							if(a instanceof AgentParticles){
-								if(a.couleur == Color.gray)
-									cpp++;
-							}
-						}
-						if(trace){
-							System.out.println("Tick" + (nbTicks - i+1));
-							if(this.type.equals("fishes")){
-								System.out.println("nb requin : "+cps);
-								System.out.println("nb poisson : "+cpf);
-							}
-							if(this.type.equals("particules"))
-								System.out.println("particules non collisionnées : "+cpp);
-						}
-					} catch (InterruptedException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}		
-		
-	}	
-	
+				}
+
+	}
+
 	public abstract void firstRun();
-	
+
 	public Environment getEnvironnement() {
 		return this.e;
 	}
-	
-	public abstract void doTrace();
-	
+
+	public abstract void doTrace(int idTick);
+
 	public void setType(String type){
 		this.type = type;
 	}
-	
+
 	public void setTrace(String exportTrace) {
 		this.exportTrace = exportTrace;
 	}
-	
+
 	public String getTrace() {
 		return this.exportTrace;
 	}
-	
-	
+
+
 }
