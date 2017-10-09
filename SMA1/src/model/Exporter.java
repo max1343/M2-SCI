@@ -1,10 +1,9 @@
 package model;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 
 public  class Exporter {
 	
@@ -14,8 +13,14 @@ public  class Exporter {
 
 	public Exporter(String filename) {
 		this.fileName = filename;
+		File file = new File(filename + ".txt");
+
 		try {
-			writer = new FileWriter(this.fileName);
+
+			if (!file.exists()) {
+			   file.createNewFile();
+			}
+			writer = new FileWriter(file);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -24,8 +29,9 @@ public  class Exporter {
 	
 	public void writeOnFile(String trace) {
 
-		bw = new BufferedWriter(writer);
 		try {
+			System.out.println(trace);
+			bw = new BufferedWriter(writer);
 			bw.write(trace);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -36,7 +42,6 @@ public  class Exporter {
 
 	public void closeFile() {
 		try {
-			bw.close();
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

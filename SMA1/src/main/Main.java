@@ -52,21 +52,20 @@ public class Main {
 			
 			switch(prop.getProperty("db.type")) {
 				case "particles" : createParticlesEnvironment();
-									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbParticles")));
+									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbParticles")), file);
 								   	c.setType(1);
-								   	sma.setType("particules");
 									break;								   
 				case "fishes": 	   	createWatorEnvironment();
 									sma = new SMAWator((EnvironmentWator) env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed, 
 						Integer.parseInt(prop.getProperty("db.nbFish")), Integer.parseInt(prop.getProperty("db.nbShark")), Integer.parseInt(prop.getProperty("db.fishBreedTime")),
-						Integer.parseInt(prop.getProperty("db.sharkBreedTime")), Integer.parseInt(prop.getProperty("db.sharkStarveTime")));
+						Integer.parseInt(prop.getProperty("db.sharkBreedTime")), Integer.parseInt(prop.getProperty("db.sharkStarveTime")), file);
 									c.setType(2);
-									sma.setType("fishes");
 									break;
 				case "pacman": 		createPacmanEnvironment();
-									sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,Integer.parseInt(prop.getProperty("db.nbHunter")),Integer.parseInt(prop.getProperty("db.nbWall")));
+									sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), 
+											Integer.parseInt(prop.getProperty("db.nbTicks")), seed,Integer.parseInt(prop.getProperty("db.nbHunter")),
+											Integer.parseInt(prop.getProperty("db.nbWall")), file);
 									c.setType(3);
-									sma.setType("pacman");
 									break;
 			}
 			

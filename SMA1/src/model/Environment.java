@@ -4,7 +4,6 @@ import java.util.Observable;
 
 import model.Agent.Direction;
 import pacman.AgentHunter;
-import pacman.AgentNull;
 import particles.AgentParticles;
 import wator.AgentFish; 
 
@@ -16,7 +15,7 @@ public abstract class Environment extends Observable {
 	public Environment(int height, int width) {
 		this.height = height;
 		this.width = width;
-		setAgents(new Agent[width][height]);
+		agents = new Agent[width][height];
 	}
 
 	public boolean hasAgentAtPosition(int x, int y){
@@ -33,10 +32,10 @@ public abstract class Environment extends Observable {
 	}
 	
 	public void deleteBall(Agent a){
-		if(a instanceof AgentHunter){
+		/** if(a instanceof AgentHunter){
 			getAgents()[a.getPosX()][a.getPosY()] = new AgentNull(a.getPosX(), a.getPosY(),a.getEnv(),true);
 		}
-		else
+		else **/
 			getAgents()[a.getPosX()][a.getPosY()] = null;
 	}
 
@@ -50,20 +49,6 @@ public abstract class Environment extends Observable {
 			}
 		}
 		return liste;
-	}
-	
-	public void initDijkstra(){
-		for(int i=0; i<height; i++){
-			for(int j=0; j<width; j++){
-				if(this.agents[i][j] != null){
-					this.agents[i][j].dijkstra = -1;
-				}
-				else{
-					this.agents[i][j] = new AgentNull(i,j,this,true);
-					
-				}
-			}
-		}
 	}
 
 
@@ -83,7 +68,4 @@ public abstract class Environment extends Observable {
 		return agents;
 	}
 
-	public void setAgents(Agent[][] agents) {
-		this.agents = agents;
-	}
 }

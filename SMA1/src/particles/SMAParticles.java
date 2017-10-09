@@ -21,8 +21,8 @@ public class SMAParticles extends SMA{
 	private int posX, posY;
 
 
-	public SMAParticles(Environment e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart) {
-		super(e, trace, scheduling, nbTicks);
+	public SMAParticles(Environment e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart, String filename) {
+		super(e, trace, scheduling, nbTicks, filename);
 		this.nbParticules = nbPart;
 		this.seed = seed;
 	}
@@ -46,9 +46,15 @@ public class SMAParticles extends SMA{
 	}
 
 	@Override
-	public void doTrace(int idTick) {
-		System.out.println("Tick" + idTick);
-		System.out.println("");
+	public String doTrace(int idTick) {
+		int count = 0;
+		for(AgentParticles ag : particules) {
+			if(ag.getColor().equals(Color.RED))
+				count++;
+		}
+		String trace = "Tick " + idTick +"\n";
+		trace += "Nb Particules collisionnées " + count + "\n";
+		return trace;
 
 	}
 

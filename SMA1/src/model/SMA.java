@@ -7,7 +7,6 @@ import java.util.Observable;
 
 import org.omg.CORBA.SetOverrideType;
 
-import pacman.AgentNull;
 import particles.AgentParticles;
 import wator.AgentFish;
 import wator.AgentShark;
@@ -23,15 +22,16 @@ public abstract class SMA extends Observable {
 	public boolean trace;
 	private int idTick;
 	private int rand, nb;
-	private String type;
-	protected String exportTrace;
+	private String sTrace;
+	protected Exporter export;
 
-	public SMA(Environment e, boolean trace, String scheduling, int nbTicks){
+	public SMA(Environment e, boolean trace, String scheduling, int nbTicks, String filename){
 		this.e = e;
 		this.trace = trace;
 		this.idTick = 1;
 		this.scheduling = scheduling;
 		this.nbTicks = nbTicks;
+		this.export = new Exporter(filename);
 	}
 
 	public void schedule() throws InterruptedException{
@@ -41,21 +41,21 @@ public abstract class SMA extends Observable {
 		
 		if(scheduling.equals("sequentiel")){
 			for(Agent ag : agents){
-				if(!(ag instanceof AgentNull))
+				//if(!(ag instanceof AgentNull))
 						ag.decide();
 			}
 		}
 		else if(scheduling.equals("aleatoire")){
 				for(int i = nb; i>0; i--){
 					rand = (int) Math.round(Math.random()*(nb-1));
-					if(!(agents.get(rand) instanceof AgentNull))
+					//if(!(agents.get(rand) instanceof AgentNull))
 						agents.get(rand).decide();
 				}
 		}
 		else{
 			Collections.shuffle(agents);
 			for(Agent ag : agents){
-				if(!(ag instanceof AgentNull))
+				//if(!(ag instanceof AgentNull))
 					ag.decide();
 			}
 		}
@@ -68,8 +68,10 @@ public abstract class SMA extends Observable {
 					schedule();
 					setChanged();
 					notifyObservers("env");
-					if(this.trace)
-							doTrace(idTick);
+					if(this.trace) {
+							sTrace = doTrace(idTick);
+							export.writeOnFile(sTrace);
+					}
 					idTick++;
 					Thread.sleep(200 *FPS);
 				} catch (InterruptedException e1) {
@@ -84,18 +86,15 @@ public abstract class SMA extends Observable {
 		return this.e;
 	}
 
-	public abstract void doTrace(int idTick);
+	public abstract String doTrace(int idTick);
 
-	public void setType(String type){
-		this.type = type;
-	}
 
-	public void setTrace(String exportTrace) {
-		this.exportTrace = exportTrace;
+	public void setTrace(String sTrace) {
+		this.sTrace = sTrace;
 	}
 
 	public String getTrace() {
-		return this.exportTrace;
+		return this.sTrace;
 	}
 
 

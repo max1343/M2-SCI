@@ -17,8 +17,8 @@ public class SMAWator extends SMA{
 	private int posX, posY;
 	private int cpf = 0, cps = 0;
 
-	public SMAWator(EnvironmentWator e, boolean trace, String scheduling, int nbTicks, int seed, int nbFish, int nbShark, int fishBreedTime, int sharkBreedTime, int sharkStarveTime) {
-		super(e, trace, scheduling, nbTicks);
+	public SMAWator(EnvironmentWator e, boolean trace, String scheduling, int nbTicks, int seed, int nbFish, int nbShark, int fishBreedTime, int sharkBreedTime, int sharkStarveTime, String filename) {
+		super(e, trace, scheduling, nbTicks, filename);
 		this.nbFish = nbFish;
 		this.nbShark = nbShark;
 		this.fishBreedTime = fishBreedTime;
@@ -56,8 +56,8 @@ public class SMAWator extends SMA{
 	}
 
 	@Override
-	public void doTrace(int idTick) {
+	public String doTrace(int idTick) {
 		System.out.println("Tick" + idTick);
-
+		return "";
 	}
 }

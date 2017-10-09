@@ -16,8 +16,8 @@ public class SMAPacman extends SMA{
 	private int seed;
 	private int posX, posY, nbHunters, nbWalls;
 
-	public SMAPacman(EnvironmentPacman e, boolean trace, String scheduling, int nbTicks,int seed, int nbH, int nbW) {
-		super(e, trace, scheduling, nbTicks);
+	public SMAPacman(EnvironmentPacman e, boolean trace, String scheduling, int nbTicks,int seed, int nbH, int nbW, String filename) {
+		super(e, trace, scheduling, nbTicks, filename);
 		this.seed = seed;
 		this.nbHunters = nbH;
 		this.nbWalls = nbW;
