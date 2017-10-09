@@ -1,0 +1,22 @@
+db.type=particles
+db.torus=true
+db.nbTicks=0
+db.grid=true
+db.canvasSizeX=600
+db.canvasSizeY=600
+db.delay=1
+db.nbParticles=23
+db.gridSizeX=50
+db.gridSizeY=50
+db.scheduling=equitable
+#equitable ou aleatoire ou sequentiel
+db.seed=0
+db.trace=true
+db.nbShark=43
+db.nbFish=77
+db.nbPart=100
+db.fishBreedTime=20
+db.sharkBreedTime=20
+db.sharkStarveTime=18
+db.nbHunter=3
+db.nbWall=20

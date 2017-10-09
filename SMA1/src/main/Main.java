@@ -34,7 +34,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 	    Scanner sc = new Scanner(System.in);
-		System.out.println("Indiquez le fichier à charger");
+		System.out.println("Indiquez le fichier ï¿½ charger");
 		String file = sc.nextLine();
 		try {
 			// load a properties file
@@ -65,6 +65,9 @@ public class Main {
 									break;
 				case "pacman": 		createPacmanEnvironment();
 									sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,Integer.parseInt(prop.getProperty("db.nbHunter")),Integer.parseInt(prop.getProperty("db.nbWall")));
+									c.setType(3);
+									sma.setType("pacman");
+									break;
 			}
 			
 			Fenetre fen = new Fenetre(c);
@@ -107,6 +110,7 @@ public class Main {
 		int gridSizeX = Integer.parseInt(prop.getProperty("db.gridSizeX"));
 		int gridSizeY = Integer.parseInt(prop.getProperty("db.gridSizeY"));
 		env = new EnvironmentPacman(gridSizeX,gridSizeY);
+		((EnvironmentPacman) env).initDijkstra();
 		env.setTorique(Boolean.valueOf(prop.getProperty("db.torus")));
 	}
 	

@@ -3,48 +3,69 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import model.Agent.Direction;
+import pacman.AgentHunter;
+import pacman.AgentNull;
 import particles.AgentParticles;
 import wator.AgentFish; 
 
 public abstract class Environment extends Observable {
 	public int height, width;
-	Agent[][] agents;
+	public Agent[][] agents;
 	public boolean torique;
 	
 	public Environment(int height, int width) {
 		this.height = height;
 		this.width = width;
-		agents = new Agent[width][height];
+		setAgents(new Agent[width][height]);
 	}
 
 	public boolean hasAgentAtPosition(int x, int y){
-		return agents[x][y] != null;
+		return getAgents()[x][y] != null;
 	}
 	
 	public Agent getAgentAtPosition(int x, int y){
-		return agents[x][y];
+		return getAgents()[x][y];
 	}
 	
 
 	public void setBall(Agent a){
-		agents[a.getPosX()][a.getPosY()] = a;
+		getAgents()[a.getPosX()][a.getPosY()] = a;
 	}
 	
 	public void deleteBall(Agent a){
-		agents[a.getPosX()][a.getPosY()] = null;
+		if(a instanceof AgentHunter){
+			getAgents()[a.getPosX()][a.getPosY()] = new AgentNull(a.getPosX(), a.getPosY(),a.getEnv(),true);
+		}
+		else
+			getAgents()[a.getPosX()][a.getPosY()] = null;
 	}
 
 	public ArrayList<Agent> getAllBall() {
 		ArrayList<Agent> liste = new ArrayList<Agent>();
 		for(int i = 0; i<width; i++){
 			for(int j=0; j<height; j++){
-				if(agents[i][j] != null){
-					liste.add(agents[i][j]);
+				if(getAgents()[i][j] != null){
+					liste.add(getAgents()[i][j]);
 				}		
 			}
 		}
 		return liste;
 	}
+	
+	public void initDijkstra(){
+		for(int i=0; i<height; i++){
+			for(int j=0; j<width; j++){
+				if(this.agents[i][j] != null){
+					this.agents[i][j].dijkstra = -1;
+				}
+				else{
+					this.agents[i][j] = new AgentNull(i,j,this,true);
+					
+				}
+			}
+		}
+	}
+
 
 	public void setTorique(boolean tor){
 		this.torique = tor;
@@ -56,5 +77,13 @@ public abstract class Environment extends Observable {
 	
 	public int getHeight() {
 		return this.height;
+	}
+
+	public Agent[][] getAgents() {
+		return agents;
+	}
+
+	public void setAgents(Agent[][] agents) {
+		this.agents = agents;
 	}
 }

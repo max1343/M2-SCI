@@ -4,4 +4,12 @@
 		<item value="/home/m2ivi/brusc/Documents/Master2/M2-SCI/SMA1"/>
 		<item value="/home/m2ivi/brusc/Documents/Master2/M2-SCI"/>
 	</list>
+	<section name="NewWizardAction">
+		<item value="org.obeonetwork.dsl.uml2.design.wizard1" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.obeonetwork.dsl.uml2.design.category"/>
+		</list>
+	</section>
+	<section name="BasicNewProjectResourceWizard">
+	</section>
 </section>

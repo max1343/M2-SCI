@@ -7,6 +7,7 @@ import java.util.Observable;
 
 import org.omg.CORBA.SetOverrideType;
 
+import pacman.AgentNull;
 import particles.AgentParticles;
 import wator.AgentFish;
 import wator.AgentShark;
@@ -37,21 +38,25 @@ public abstract class SMA extends Observable {
 		rand = 0;
 		agents = e.getAllBall();
 		nb = agents.size();
+		
 		if(scheduling.equals("sequentiel")){
 			for(Agent ag : agents){
-				ag.decide();
+				if(!(ag instanceof AgentNull))
+						ag.decide();
 			}
 		}
 		else if(scheduling.equals("aleatoire")){
 				for(int i = nb; i>0; i--){
 					rand = (int) Math.round(Math.random()*(nb-1));
-					agents.get(rand).decide();
+					if(!(agents.get(rand) instanceof AgentNull))
+						agents.get(rand).decide();
 				}
 		}
 		else{
 			Collections.shuffle(agents);
 			for(Agent ag : agents){
-				ag.decide();
+				if(!(ag instanceof AgentNull))
+					ag.decide();
 			}
 		}
 	}

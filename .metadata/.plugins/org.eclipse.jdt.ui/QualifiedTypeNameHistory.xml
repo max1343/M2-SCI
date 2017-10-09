@@ -8,7 +8,6 @@
 <fullyQualifiedTypeName name="wator.Shark"/>
 <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="particles.EnvironmentParticles"/>
 <fullyQualifiedTypeName name="wator.SMAWator"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.SetOverrideType"/>
@@ -17,11 +16,16 @@
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="model.Agent.Direction"/>
-<fullyQualifiedTypeName name="model.Agent"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="model.Environment"/>
 <fullyQualifiedTypeName name="pacman.AgentWall"/>
 <fullyQualifiedTypeName name="pacman.AgentAvatar"/>
 <fullyQualifiedTypeName name="pacman.SMAPacman"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="model.Position"/>
+<fullyQualifiedTypeName name="model.Agent"/>
 <fullyQualifiedTypeName name="pacman.EnvironmentPacman"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="pacman.AgentNull"/>
+<fullyQualifiedTypeName name="pacman.AgentHunter"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,19 @@
+package pacman;
+
+import java.awt.Color;
+
+import model.Agent;
+
+public class AgentNull extends Agent {
+	
+	public AgentNull(int x,int y,EnvironmentPacman e, boolean trace) {
+		super(x, y,Color.white, e, trace);
+		this.dijkstra = -1;
+	}
+
+	@Override
+	public void decide() {
+		// TODO Auto-generated method stub
+		
+	}
+}
