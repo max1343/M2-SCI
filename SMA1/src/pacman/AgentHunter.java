@@ -13,13 +13,10 @@ public class AgentHunter extends Agent {
 	
 	@Override
 	public void decide() {
-		EnvironmentPacman e = (EnvironmentPacman) this.getEnv();
-		int min=e.getHeight()*e.getWidth(), ix=0, iy=0;
-		for (Direction d : Direction.VALUES){
-				ix = d.getX();
-				iy = d.getY();
-		}
-		move(ix,iy);
+		Direction dirMin = ((EnvironmentPacman) getEnv()).getMinDirection(this);
+		//int min=e.getHeight()*e.getWidth(), ix=0, iy=0;
+
+		move(dirMin.getX(),dirMin.getY());
 
 	}
 	
