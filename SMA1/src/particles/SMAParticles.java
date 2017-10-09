@@ -45,4 +45,10 @@ public class SMAParticles extends SMA{
 		run();
 	}
 
+	@Override
+	public void doTrace() {
+		
+		
+	}
+
 }

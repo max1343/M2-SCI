@@ -23,6 +23,7 @@ public abstract class SMA extends Observable {
 	private int idTick;
 	private int rand, nb;
 	private String type;
+	protected String exportTrace;
 	
 	public SMA(Environment e, boolean trace, String scheduling, int nbTicks){
 		this.e = e;
@@ -65,7 +66,7 @@ public abstract class SMA extends Observable {
 						System.out.println("Tick" + idTick);
 					schedule();
 					setChanged();
-					notifyObservers(e);
+					notifyObservers("env");
 					Thread.sleep(200 *FPS);
 					ArrayList<Agent> la = e.getAllBall();
 					int cpf = 0;
@@ -137,8 +138,19 @@ public abstract class SMA extends Observable {
 		return this.e;
 	}
 	
+	public abstract void doTrace();
+	
 	public void setType(String type){
 		this.type = type;
 	}
+	
+	public void setTrace(String exportTrace) {
+		this.exportTrace = exportTrace;
+	}
+	
+	public String getTrace() {
+		return this.exportTrace;
+	}
+	
 	
 }

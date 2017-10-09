@@ -1,5 +1,9 @@
-/particles/
-/model/
-/wator/
 /pacman/
 /main/
+/model/
+/particles/
+/vue/
+/wator/
+/ressources/
+/constant.properties
+/particle1.properties

@@ -2,10 +2,9 @@ package main;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Scanner;
 
-import model.Agent;
 import model.Environment;
 import model.SMA;
 import pacman.EnvironmentPacman;
@@ -34,11 +33,12 @@ public class Main {
 	static SMA sma;
 	
 	public static void main(String[] args) {
-
-		
+	    Scanner sc = new Scanner(System.in);
+		System.out.println("Indiquez le fichier à charger");
+		String file = sc.nextLine();
 		try {
 			// load a properties file
-			input = new FileInputStream("src/constant.properties");
+			input = new FileInputStream("src/" + file  + ".properties");
 			prop.load(input);
 			
 			// recuperation et traitement des donnees du fichier
@@ -51,8 +51,8 @@ public class Main {
 			createCanvas();
 			
 			switch(prop.getProperty("db.type")) {
-				case "particules" : createParticlesEnvironment();
-									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbPart")));
+				case "particles" : createParticlesEnvironment();
+									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbParticles")));
 								   	c.setType(1);
 								   	sma.setType("particules");
 									break;								   
@@ -60,11 +60,11 @@ public class Main {
 									sma = new SMAWator((EnvironmentWator) env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed, 
 						Integer.parseInt(prop.getProperty("db.nbFish")), Integer.parseInt(prop.getProperty("db.nbShark")), Integer.parseInt(prop.getProperty("db.fishBreedTime")),
 						Integer.parseInt(prop.getProperty("db.sharkBreedTime")), Integer.parseInt(prop.getProperty("db.sharkStarveTime")));
-							      c.setType(2);
-							      sma.setType("fishes");
+									c.setType(2);
+									sma.setType("fishes");
 									break;
-				case "pacman": createPacmanEnvironment();
-								sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,Integer.parseInt(prop.getProperty("db.nbHunter")),Integer.parseInt(prop.getProperty("db.nbWall")));
+				case "pacman": 		createPacmanEnvironment();
+									sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,Integer.parseInt(prop.getProperty("db.nbHunter")),Integer.parseInt(prop.getProperty("db.nbWall")));
 			}
 			
 			Fenetre fen = new Fenetre(c);

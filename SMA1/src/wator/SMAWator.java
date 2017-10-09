@@ -54,4 +54,10 @@ public class SMAWator extends SMA{
 		run();
 	
 	}
+
+	@Override
+	public void doTrace() {
+		// TODO Auto-generated method stub
+		
+	}
 }

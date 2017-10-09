@@ -9,6 +9,7 @@ import java.util.Observer;
 
 import model.Agent;
 import model.Environment;
+import model.SMA;
 
 public class CanvasGrille extends Canvas implements Observer{
 	private Environment e;
@@ -24,6 +25,8 @@ public class CanvasGrille extends Canvas implements Observer{
 	
 	
 	public void paint(Graphics g){
+		//la ligne en dessous doit permettre de donner un rendu plus dynamique mais elle bug un peu 
+		//((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 		 if(type==2){
 			 this.setBackground(Color.cyan);
 			 g.setColor(Color.WHITE);
@@ -63,7 +66,10 @@ public class CanvasGrille extends Canvas implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		this.setEnv((Environment) arg);
+		if(arg.equals("env")) {
+			SMA temp = (SMA) o;
+			this.setEnv(temp.getEnvironnement());
+		}
 		repaint();
 	}
 	
