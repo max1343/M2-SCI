@@ -109,7 +109,7 @@ public class Main {
 		int gridSizeX = Integer.parseInt(prop.getProperty("db.gridSizeX"));
 		int gridSizeY = Integer.parseInt(prop.getProperty("db.gridSizeY"));
 		env = new EnvironmentPacman(gridSizeX,gridSizeY);
-		((EnvironmentPacman) env).initDijkstra();
+		//((EnvironmentPacman) env).initDijkstra();
 		env.setTorique(Boolean.valueOf(prop.getProperty("db.torus")));
 	}
 	

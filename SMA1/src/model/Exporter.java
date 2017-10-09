@@ -4,23 +4,25 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public  class Exporter {
 	
 	private String fileName;
 	FileWriter writer;
+	File file;
 	BufferedWriter bw;
+	PrintWriter printW;
 
 	public Exporter(String filename) {
 		this.fileName = filename;
-		File file = new File(filename + ".txt");
+		file = new File(filename + ".txt");
 
 		try {
 
 			if (!file.exists()) {
 			   file.createNewFile();
 			}
-			writer = new FileWriter(file);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -30,9 +32,10 @@ public  class Exporter {
 	public void writeOnFile(String trace) {
 
 		try {
+			writer = new FileWriter(file);
 			System.out.println(trace);
-			bw = new BufferedWriter(writer);
-			bw.write(trace);
+			printW = new PrintWriter(new BufferedWriter(writer));
+			printW.println(trace);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

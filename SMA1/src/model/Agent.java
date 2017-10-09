@@ -45,7 +45,6 @@ public abstract class Agent {
 	private Environment env;
 	protected Color couleur;
 	public boolean trace;
-	public int dijkstra ;
 	
 	public Agent(int posX, int posY, Color c, Environment e, boolean trace){
 		this.posX = posX;
@@ -54,7 +53,6 @@ public abstract class Agent {
 		this.env = e;
 		
 		this.trace = trace;
-		this.dijkstra = -1;
 	}
 	
 	public abstract void decide();
@@ -104,11 +102,4 @@ public abstract class Agent {
 		return this.env;
 	}
 
-	public int getDijkstra() {
-		return dijkstra;
-	}
-
-	public void setDijkstra(int dijkstra) {
-		this.dijkstra = dijkstra;
-	}
 }

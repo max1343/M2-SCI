@@ -23,7 +23,7 @@ public class AgentAvatar extends Agent implements KeyListener {
 	public void setPathDijkstra(EnvironmentPacman e, ArrayList<Position> l){
 		for(int i=0; i<e.getHeight(); i++){
 			for(int j=0; j<e.getWidth(); j++){
-				e.agents[i][j].dijkstra = -1;
+				
 			}
 		}
 		
@@ -35,7 +35,6 @@ public class AgentAvatar extends Agent implements KeyListener {
 		    xc=p.getX();
 		    yc = p.getY();	
 		    dist = p.getValeur(); 
-		    e.agents[xc][yc].dijkstra = dist;
 		    //on ajoute les 4 voisins à la liste
 		    ajoutListe(e,xc,yc,dist,l);
 		    p = l.get(0); 
@@ -64,7 +63,7 @@ public class AgentAvatar extends Agent implements KeyListener {
     }
 
     public boolean posValide(int x,int y, EnvironmentPacman e){
-    	if(x>0 && x<e.width && y>0 && y<e.height && e.agents[x][y].dijkstra == -1)
+    	if(x>0 && x<e.width && y>0 && y<e.height )
     		return true;
     	return false;
     }

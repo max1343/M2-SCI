@@ -27,10 +27,11 @@ public class SMAPacman extends SMA{
 	public void firstRun() {
 		// TODO Auto-generated method stub
 		Random rnd = new Random(seed);
+		avatar = new AgentAvatar(2, 2, Color.BLUE, e, true);
 		walls = new ArrayList<AgentWall>();
 		hunters = new ArrayList<AgentHunter>();
 		EnvironmentPacman env = (EnvironmentPacman) this.getEnvironnement();
-		env.initDijkstra();
+		env.initDijkstra(avatar);
 		
 		posX = rnd.nextInt(e.height - 1);
 		posY = rnd.nextInt(e.width - 1);
@@ -60,8 +61,9 @@ public class SMAPacman extends SMA{
 	}
 
 	@Override
-	public void doTrace(int idTick) {
-			System.out.println("Tick" + idTick);
+	public String doTrace(int idTick) {
+			String trace = "Tick" + idTick;
+			return trace;
 	}
 
 }
