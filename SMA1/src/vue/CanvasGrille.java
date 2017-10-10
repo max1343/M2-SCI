@@ -3,6 +3,8 @@ package vue;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -10,8 +12,9 @@ import java.util.Observer;
 import model.Agent;
 import model.Environment;
 import model.SMA;
+import pacman.EnvironmentPacman;
 
-public class CanvasGrille extends Canvas implements Observer{
+public class CanvasGrille extends Canvas implements Observer, KeyListener{
 	private Environment e;
 	private ArrayList<Agent> listeAgents;
 	public boolean grid;
@@ -27,6 +30,7 @@ public class CanvasGrille extends Canvas implements Observer{
 	public void paint(Graphics g){
 		//la ligne en dessous doit permettre de donner un rendu plus dynamique mais elle bug un peu 
 		//((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+		requestFocus();
 		 if(type==2){
 			 this.setBackground(Color.cyan);
 			 g.setColor(Color.WHITE);
@@ -53,7 +57,8 @@ public class CanvasGrille extends Canvas implements Observer{
 
 		
 		listeAgents = e.getAllBall();
-		int posX, posY;
+		int posX, posY;		requestFocus();
+
 		for(Agent ag : listeAgents){
 			posX = ag.getPosX()*getWidth()/e.height;
 			posY = ag.getPosY()*getHeight()/e.width;
@@ -90,6 +95,42 @@ public class CanvasGrille extends Canvas implements Observer{
 	
 	public void setType(int t){
 		this.type = t;
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("lol");
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+		System.out.println("lolpac");
+		switch(e.getKeyCode()){
+			case KeyEvent.VK_DOWN : ((EnvironmentPacman) this.e).findAvatar(0,-1);
+									break;
+									
+			case KeyEvent.VK_UP	:	((EnvironmentPacman) this.e).findAvatar(0,1);
+									break;
+				
+			case KeyEvent.VK_LEFT : ((EnvironmentPacman) this.e).findAvatar(-1,0);
+									break;
+			
+			case KeyEvent.VK_RIGHT : ((EnvironmentPacman) this.e).findAvatar(1,0);
+			 						break;
+		}		
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("lol");
+		
 	}
 
 }

@@ -27,7 +27,7 @@ public class SMAPacman extends SMA{
 	public void firstRun() {
 		// TODO Auto-generated method stub
 		Random rnd = new Random(seed);
-		avatar = new AgentAvatar(2, 2, Color.BLUE, e, true);
+		avatar = new AgentAvatar(2, 2, Color.BLUE, (EnvironmentPacman) e, true);
 		walls = new ArrayList<AgentWall>();
 		hunters = new ArrayList<AgentHunter>();
 		EnvironmentPacman env = (EnvironmentPacman) this.getEnvironnement();
@@ -35,13 +35,11 @@ public class SMAPacman extends SMA{
 		
 		posX = rnd.nextInt(e.height - 1);
 		posY = rnd.nextInt(e.width - 1);
-		avatar = new AgentAvatar(posX, posY, Color.blue, e, trace);
 		e.setBall(avatar);
 
 		for(int i =1;i<=nbHunters;i++){
 			posX = rnd.nextInt(e.height - 1);
 			posY = rnd.nextInt(e.width - 1);
-
 			ah = new AgentHunter(posX,posY,Color.RED,(EnvironmentPacman) getEnvironnement(),trace);
 			hunters.add(ah);
 			e.setBall(ah);
@@ -56,7 +54,10 @@ public class SMAPacman extends SMA{
 			e.setBall(aw);
 		}
 
-		
+		for(AgentHunter ah: hunters){
+			agents.add(ah);
+		}
+		agents.add(avatar);
 		run();
 	}
 
@@ -66,4 +67,7 @@ public class SMAPacman extends SMA{
 			return trace;
 	}
 
+	public AgentAvatar getAvatar() {
+		return avatar;
+	}
 }

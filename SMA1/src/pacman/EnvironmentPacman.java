@@ -1,5 +1,9 @@
 package pacman;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import model.Agent;
 import model.Agent.Direction;
 import model.Environment;
 
@@ -23,7 +27,7 @@ public class EnvironmentPacman extends Environment {
 	
 	
 	public Direction getMinDirection(AgentHunter ah) {
-		int dmin = 10;
+		int dmin = width+height;
 		Direction dir = Direction.Nord;
 		for (Direction d : Direction.values()){		
 			if(dijsktra[ah.getPosX() + d.getX()][ah.getPosY() + d.getY()] <= dmin ) {
@@ -33,6 +37,21 @@ public class EnvironmentPacman extends Environment {
 		}
 		return dir;
 	}
+
+	public void findAvatar(int pasX, int pasY){
+		AgentAvatar ag = null;
+		for(int i = 0; i<height; i++){
+			for(int j = 0; i<width; j++){
+				if(getAgentAtPosition(i, j) instanceof AgentAvatar)
+					ag = (AgentAvatar) getAgentAtPosition(i, j);
+			}
+		}
+		ag.setPasX(pasX);
+		ag.setPasY(pasY);
+	}
+	
+
+
 	
 	
 	

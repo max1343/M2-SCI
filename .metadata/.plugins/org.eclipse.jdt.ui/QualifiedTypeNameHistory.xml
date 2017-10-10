@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="modele.Action"/>
 <fullyQualifiedTypeName name="wator.Fish"/>
 <fullyQualifiedTypeName name="wator.Shark"/>
-<fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="particles.EnvironmentParticles"/>
 <fullyQualifiedTypeName name="wator.SMAWator"/>
@@ -18,8 +17,6 @@
 <fullyQualifiedTypeName name="model.Agent.Direction"/>
 <fullyQualifiedTypeName name="model.Environment"/>
 <fullyQualifiedTypeName name="pacman.AgentWall"/>
-<fullyQualifiedTypeName name="pacman.AgentAvatar"/>
-<fullyQualifiedTypeName name="pacman.SMAPacman"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="model.Position"/>
 <fullyQualifiedTypeName name="model.Agent"/>
@@ -28,4 +25,7 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="pacman.AgentNull"/>
 <fullyQualifiedTypeName name="pacman.AgentHunter"/>
+<fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
+<fullyQualifiedTypeName name="pacman.AgentAvatar"/>
+<fullyQualifiedTypeName name="pacman.SMAPacman"/>
 </qualifiedTypeNameHistroy>

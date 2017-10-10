@@ -1,0 +1,25 @@
+package vue;
+
+import javax.swing.JFrame;
+
+import pacman.AgentAvatar;
+
+public class Fenetre extends JFrame{
+	
+	public Fenetre(CanvasGrille c, AgentAvatar ag){
+		this.setTitle("vue");
+		this.setSize(c.cSizeX, c.cSizeY);
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		c.addKeyListener(ag);
+		
+	    this.add(c); 
+	    		
+	    this.setVisible(true);
+	
+	}
+	
+	
+		
+}

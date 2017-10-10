@@ -42,7 +42,7 @@ public abstract class Agent {
 	
 	protected int posX;
 	protected int posY;
-	private Environment env;
+	protected Environment env;
 	protected Color couleur;
 	public boolean trace;
 	

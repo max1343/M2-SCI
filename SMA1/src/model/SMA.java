@@ -14,7 +14,7 @@ import wator.SMAWator;
 
 public abstract class SMA extends Observable {
 
-	private ArrayList<Agent> agents;
+	protected ArrayList<Agent> agents;
 	protected Environment e;
 	public static int FPS = 1;
 	public int nbTicks;
@@ -25,6 +25,7 @@ public abstract class SMA extends Observable {
 	private String sTrace;
 	protected Exporter export;
 
+
 	public SMA(Environment e, boolean trace, String scheduling, int nbTicks, String filename){
 		this.e = e;
 		this.trace = trace;
@@ -32,6 +33,8 @@ public abstract class SMA extends Observable {
 		this.scheduling = scheduling;
 		this.nbTicks = nbTicks;
 		this.export = new Exporter(filename);
+		agents = new ArrayList<Agent>();
+
 	}
 
 	public void schedule() throws InterruptedException{
@@ -41,7 +44,7 @@ public abstract class SMA extends Observable {
 		
 		if(scheduling.equals("sequentiel")){
 			for(Agent ag : agents){
-				//if(!(ag instanceof AgentNull))
+				//if(!(ag instanceof AgentNull))walls
 						ag.decide();
 			}
 		}
@@ -62,7 +65,6 @@ public abstract class SMA extends Observable {
 	}
 
 	public void run(){
-		agents = new ArrayList<Agent>();
 			while(idTick != nbTicks)
 				try {
 					schedule();

@@ -1,12 +1,8 @@
 package vue;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.GridLayout;
+import javax.swing.JFrame;
 
-import javax.swing.*;
-import javax.swing.border.Border;
+import pacman.AgentAvatar;
 
 public class Fenetre extends JFrame{
 	
@@ -16,13 +12,13 @@ public class Fenetre extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
+
 	    this.add(c); 
 	    		
 	    this.setVisible(true);
 	
 	}
 	
-	
+
 		
 }
