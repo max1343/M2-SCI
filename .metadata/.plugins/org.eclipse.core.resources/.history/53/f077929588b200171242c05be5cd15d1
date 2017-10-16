@@ -1,0 +1,73 @@
+package particles;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
+
+import model.Agent.Direction;
+import model.Environment;
+import model.SMA;
+import wator.AgentFish;
+import wator.AgentShark;
+import wator.EnvironmentWator;
+
+public class SMAParticles extends SMA{
+	private ArrayList<AgentParticles> particules;
+	private int nbParticules;
+	private int seed;
+	private AgentParticles ap;
+	private int posX, posY;
+	private int pds;
+
+	public SMAParticles(EnvironmentParticles e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart, String filename, int pds) {
+		super(e, trace, scheduling, nbTicks, filename);
+		this.nbParticules = nbPart;
+		this.seed = seed;
+		this.pds = pds;
+	}
+
+	@Override
+	public void firstRun() {
+		// TODO Auto-generated method stub
+		Random rnd = new Random(seed);
+		particules = new ArrayList<AgentParticles>();
+		Direction dir;
+		int poids = 0;
+
+		for(int i =1;i<=nbParticules;i++){
+			posX = rnd.nextInt(e.height - 1);
+			posY = rnd.nextInt(e.width - 1);
+			dir = Direction.getRandomDir();
+			if (this.pds != 0)
+				poids = rnd.nextInt(pds - 1);
+			ap = new AgentParticles(posX, posY, dir, Color.gray, e, trace,poids);
+			particules.add(ap);
+			e.setBall(ap);
+		}
+		run();
+	}
+
+	@Override
+	public String doTrace(int idTick) {
+		int count = 0;
+		for(AgentParticles ag : particules) {
+			if(ag.getColor().equals(Color.RED))
+				count++;
+		}
+		String trace = "Tick " + idTick +"\n";
+		trace += "Nb Particules collisionn�es " + count + "\n";
+		return trace;
+
+	}
+
+	public int getPds() {
+		return pds;
+	}
+
+	public void setPds(int pds) {
+		this.pds = pds;
+	}
+	
+}
