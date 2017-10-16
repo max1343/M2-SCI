@@ -12,6 +12,7 @@ import java.util.Observer;
 import model.Agent;
 import model.Environment;
 import model.SMA;
+import pacman.AgentAvatar;
 import pacman.EnvironmentPacman;
 
 public class CanvasGrille extends Canvas implements Observer, KeyListener{
@@ -56,7 +57,7 @@ public class CanvasGrille extends Canvas implements Observer, KeyListener{
 		int tailleCaseY = this.cSizeY / e.width;
 
 		
-		listeAgents = e.getAllBall();
+		listeAgents = e.getAllAgents();
 		int posX, posY;		requestFocus();
 
 		for(Agent ag : listeAgents){

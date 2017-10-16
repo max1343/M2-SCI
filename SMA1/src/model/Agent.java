@@ -1,11 +1,11 @@
 package model;
 
 import java.awt.Color;
-import java.util.HashMap;
-import java.util.Observable;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 
-public abstract class Agent {
+public abstract class Agent implements KeyListener {
 	
 	public enum Direction{
 		Nord(0,1),
@@ -102,4 +102,20 @@ public abstract class Agent {
 		return this.env;
 	}
 
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+			
+	}
 }

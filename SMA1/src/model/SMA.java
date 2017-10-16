@@ -39,7 +39,7 @@ public abstract class SMA extends Observable {
 
 	public void schedule() throws InterruptedException{
 		rand = 0;
-		agents = e.getAllBall();
+		agents = e.getAllAgents();
 		nb = agents.size();
 		
 		if(scheduling.equals("sequentiel")){

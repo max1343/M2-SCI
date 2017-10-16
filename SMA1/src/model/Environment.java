@@ -19,16 +19,16 @@ public abstract class Environment extends Observable {
 	}
 
 	public boolean hasAgentAtPosition(int x, int y){
-		return getAgents()[x][y] != null;
+		return agents[x][y] != null;
 	}
 	
 	public Agent getAgentAtPosition(int x, int y){
-		return getAgents()[x][y];
+		return agents[x][y];
 	}
 	
 
 	public void setBall(Agent a){
-		getAgents()[a.getPosX()][a.getPosY()] = a;
+		agents[a.getPosX()][a.getPosY()] = a;
 	}
 	
 	public void deleteBall(Agent a){
@@ -36,15 +36,15 @@ public abstract class Environment extends Observable {
 			getAgents()[a.getPosX()][a.getPosY()] = new AgentNull(a.getPosX(), a.getPosY(),a.getEnv(),true);
 		}
 		else **/
-			getAgents()[a.getPosX()][a.getPosY()] = null;
+		agents[a.getPosX()][a.getPosY()] = null;
 	}
 
-	public ArrayList<Agent> getAllBall() {
+	public ArrayList<Agent> getAllAgents() {
 		ArrayList<Agent> liste = new ArrayList<Agent>();
 		for(int i = 0; i<width; i++){
 			for(int j=0; j<height; j++){
-				if(getAgents()[i][j] != null){
-					liste.add(getAgents()[i][j]);
+				if(agents[i][j] != null){
+					liste.add(agents[i][j]);
 				}		
 			}
 		}

@@ -21,7 +21,7 @@ public class SMAParticles extends SMA{
 	private int posX, posY;
 
 
-	public SMAParticles(Environment e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart, String filename) {
+	public SMAParticles(EnvironmentParticles e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart, String filename) {
 		super(e, trace, scheduling, nbTicks, filename);
 		this.nbParticules = nbPart;
 		this.seed = seed;

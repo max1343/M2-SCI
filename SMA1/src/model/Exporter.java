@@ -32,9 +32,9 @@ public  class Exporter {
 	public void writeOnFile(String trace) {
 
 		try {
-			writer = new FileWriter(file);
+			//writer = new FileWriter(file);
 			System.out.println(trace);
-			printW = new PrintWriter(new BufferedWriter(writer));
+			printW = new PrintWriter(file);
 			printW.println(trace);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

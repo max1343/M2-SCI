@@ -1,22 +1,24 @@
 package pacman;
 
 import java.awt.Color;
-import java.awt.List;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.swing.JTextField;
+
 import model.Agent;
-import model.Environment;
 import model.Position;
 
-public class AgentAvatar extends Agent implements KeyListener {
+public class AgentAvatar extends Agent {
 	private int pasX, pasY;
+	private JTextField textField;  
 	
 	public AgentAvatar(int posX, int posY, Color c, EnvironmentPacman e, boolean trace) {
 		super(posX, posY, c, e, trace);
 		this.setPasX(0);
 		this.setPasY(0);
+		
 	}
 
 	
@@ -78,6 +80,7 @@ public class AgentAvatar extends Agent implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		System.out.println("DEBUG");
 		switch(e.getKeyCode()){
 			case KeyEvent.VK_DOWN : setPasY(-1);
 									setPasX(0);
@@ -122,6 +125,10 @@ public class AgentAvatar extends Agent implements KeyListener {
 
 	public void setPasY(int pasY) {
 		this.pasY = pasY;
+	}
+	
+	public void setDirection(Direction dir) {
+		
 	}
 
 }

@@ -11,4 +11,9 @@ public class EnvironmentParticles extends Environment {
 	public EnvironmentParticles(int height, int width) {
 		super(height, width);
 	}
+	
+	public String toString() {
+		ArrayList<Agent> ags = getAllAgents();
+		return ags.toString();
+	}
 }

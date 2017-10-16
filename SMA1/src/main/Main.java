@@ -1,12 +1,19 @@
 package main;
+import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import java.util.Scanner;
 
+import javax.swing.JPanel;
+
+import model.Agent;
 import model.Environment;
 import model.SMA;
+import pacman.AgentAvatar;
+import pacman.AgentHunter;
+import pacman.AgentWall;
 import pacman.EnvironmentPacman;
 import pacman.SMAPacman;
 import particles.EnvironmentParticles;
@@ -48,34 +55,42 @@ public class Main {
 				seed = Integer.parseInt(prop.getProperty("db.seed"));
 		
 			
-			createCanvas();
-			
 			switch(prop.getProperty("db.type")) {
 				case "particles" : createParticlesEnvironment();
 									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbParticles")), file);
-								   	c.setType(1);
 									break;								   
 				case "fishes": 	   	createWatorEnvironment();
 									sma = new SMAWator((EnvironmentWator) env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed, 
 						Integer.parseInt(prop.getProperty("db.nbFish")), Integer.parseInt(prop.getProperty("db.nbShark")), Integer.parseInt(prop.getProperty("db.fishBreedTime")),
 						Integer.parseInt(prop.getProperty("db.sharkBreedTime")), Integer.parseInt(prop.getProperty("db.sharkStarveTime")), file);
-									c.setType(2);									c.addKeyListener(((SMAPacman) sma).getAvatar());
 
 									break;
 				case "pacman": 		createPacmanEnvironment();
 									sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), 
 											Integer.parseInt(prop.getProperty("db.nbTicks")), seed,Integer.parseInt(prop.getProperty("db.nbHunter")),
 											Integer.parseInt(prop.getProperty("db.nbWall")), file);
-									c.setType(3);
 									
 									break;
 			}
 			
-			Fenetre f = new Fenetre(c);
+
+			createCanvas();
 			
-			if (prop.getProperty("db.type").equals("pacman")) {
-				f.addKeyListener(c);
+			System.out.println(env.getAllAgents());
+			for(Agent ag: env.getAllAgents()) {
+				System.out.println("COUCOU FOR");
+				if(ag instanceof AgentAvatar) {
+					c.addKeyListener(ag);
+					System.out.println("COUCOU");
+				}
 			}
+			Fenetre f = new Fenetre(c);	
+			/**if (prop.getProperty("db.type").equals("pacman")) {
+				for(Agent ag: sma.getEnvironnement().getAllBall()) {
+					if(ag instanceof AgentAvatar)
+						f.addKeyListener(ag); 
+				}
+			}**/
 			//c.setType(Integer.parseInt(prop.getProperty("db.type")));
 			sma.addObserver(c);
 			sma.firstRun();

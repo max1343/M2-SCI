@@ -1,8 +1,7 @@
 package vue;
 
 import javax.swing.JFrame;
-
-import pacman.AgentAvatar;
+import javax.swing.JPanel;
 
 public class Fenetre extends JFrame{
 	
@@ -11,10 +10,8 @@ public class Fenetre extends JFrame{
 		this.setSize(c.cSizeX, c.cSizeY);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-
-	    this.add(c); 
-	    		
+		c.setFocusable(true);
+		this.add(c);
 	    this.setVisible(true);
 	
 	}
