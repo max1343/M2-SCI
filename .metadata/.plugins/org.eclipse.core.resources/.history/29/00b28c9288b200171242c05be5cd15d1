@@ -1,0 +1,15 @@
+db.type=particles
+db.torus=true
+db.nbTicks=0
+db.grid=true
+db.canvasSizeX=500
+db.canvasSizeY=500
+db.delay=1
+db.nbParticles=20
+db.gridSizeX=50
+db.gridSizeY=50
+db.scheduling=equitable
+#equitable ou aleatoire ou sequentiel
+db.seed=237943
+db.trace=true
+db.poids=8

@@ -57,13 +57,13 @@ public class Main {
 			
 			switch(prop.getProperty("db.type")) {
 				case "particles" : createParticlesEnvironment();
-									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbParticles")), file);
+									int pds = Integer.parseInt(prop.getProperty("db.poids"));
+									sma = new SMAParticles((EnvironmentParticles)env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed,  Integer.parseInt(prop.getProperty("db.nbParticles")), file, pds);
 									break;								   
 				case "fishes": 	   	createWatorEnvironment();
 									sma = new SMAWator((EnvironmentWator) env, Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), Integer.parseInt(prop.getProperty("db.nbTicks")), seed, 
 						Integer.parseInt(prop.getProperty("db.nbFish")), Integer.parseInt(prop.getProperty("db.nbShark")), Integer.parseInt(prop.getProperty("db.fishBreedTime")),
 						Integer.parseInt(prop.getProperty("db.sharkBreedTime")), Integer.parseInt(prop.getProperty("db.sharkStarveTime")), file);
-
 									break;
 				case "pacman": 		createPacmanEnvironment();
 									sma = new SMAPacman((EnvironmentPacman)env,Boolean.valueOf(prop.getProperty("db.trace")), prop.getProperty("db.scheduling"), 
@@ -78,10 +78,8 @@ public class Main {
 			
 			System.out.println(env.getAllAgents());
 			for(Agent ag: env.getAllAgents()) {
-				System.out.println("COUCOU FOR");
 				if(ag instanceof AgentAvatar) {
 					c.addKeyListener(ag);
-					System.out.println("COUCOU");
 				}
 			}
 			Fenetre f = new Fenetre(c);	
@@ -139,6 +137,8 @@ public class Main {
 		c.grid = Boolean.valueOf(prop.getProperty("db.grid"));
 		c.setCSizeX(Integer.parseInt(prop.getProperty("db.canvasSizeX")));
 		c.setCSizeY(Integer.parseInt(prop.getProperty("db.canvasSizeY")));
+		if(prop.getProperty("db.type").equals("fishes"))
+			c.setType(2);
 	}
 
 }

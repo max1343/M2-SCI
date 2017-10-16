@@ -19,12 +19,13 @@ public class SMAParticles extends SMA{
 	private int seed;
 	private AgentParticles ap;
 	private int posX, posY;
+	private int pds;
 
-
-	public SMAParticles(EnvironmentParticles e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart, String filename) {
+	public SMAParticles(EnvironmentParticles e, boolean trace, String scheduling, int nbTicks, int seed, int nbPart, String filename, int pds) {
 		super(e, trace, scheduling, nbTicks, filename);
 		this.nbParticules = nbPart;
 		this.seed = seed;
+		this.pds = pds;
 	}
 
 	@Override
@@ -33,12 +34,15 @@ public class SMAParticles extends SMA{
 		Random rnd = new Random(seed);
 		particules = new ArrayList<AgentParticles>();
 		Direction dir;
+		int poids = 0;
 
 		for(int i =1;i<=nbParticules;i++){
 			posX = rnd.nextInt(e.height - 1);
 			posY = rnd.nextInt(e.width - 1);
 			dir = Direction.getRandomDir();
-			ap = new AgentParticles(posX, posY, dir, Color.gray, e, trace);
+			if (this.pds > 0)
+				poids = rnd.nextInt(pds);
+			ap = new AgentParticles(posX, posY, dir, Color.gray, e, trace,poids);
 			particules.add(ap);
 			e.setBall(ap);
 		}
@@ -53,9 +57,17 @@ public class SMAParticles extends SMA{
 				count++;
 		}
 		String trace = "Tick " + idTick +"\n";
-		trace += "Nb Particules collisionnées " + count + "\n";
+		trace += "Nb Particules collisionnï¿½es " + count + "\n";
 		return trace;
 
 	}
 
+	public int getPds() {
+		return pds;
+	}
+
+	public void setPds(int pds) {
+		this.pds = pds;
+	}
+	
 }

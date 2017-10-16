@@ -10,12 +10,14 @@ public class AgentParticles extends Agent{
 	private int  pasX, pasY;
 	public boolean trace;
 	private Direction dir;
+	private int poids;
 
-	public AgentParticles(int posX, int posY, Direction dir, Color couleur, Environment e, boolean trace) {
+	public AgentParticles(int posX, int posY, Direction dir, Color couleur, Environment e, boolean trace, int pds) {
 		super(posX,posY,couleur,e,trace);
 		this.dir = dir;
 		this.pasX = dir.getX();
 		this.pasY = dir.getY();	
+		this.poids = pds;
 	}
 
 
@@ -51,16 +53,33 @@ public class AgentParticles extends Agent{
 			System.out.println("Agent couleur: " + super.couleur);
 	}
 	
-	
+		
 	public void action1(AgentParticles a){
-		int pasXi = pasX;
-		int pasYi = pasY;
-		pasX = a.getPasX();
-		a.setPasX(pasXi);
-		pasY = a.getPasY();
-		a.setPasY(pasYi);
-		a.couleur = Color.red;
-		this.couleur = Color.red;
+		if (this.poids > a.poids){
+			a.setPasX(-a.pasX);
+			a.setPasY(-a.pasY);
+			a.couleur = Color.pink;
+			this.couleur = Color.red;
+		}
+		else{
+			if (this.poids < a.poids){
+				this.setPasX(-this.pasX);
+				this.setPasY(-this.pasY);
+				a.couleur = Color.red;
+				this.couleur = Color.pink;
+			}
+			else{
+				int pasXi = pasX;
+				int pasYi = pasY;
+				pasX = a.getPasX();
+				a.setPasX(pasXi);
+				pasY = a.getPasY();
+				a.setPasY(pasYi);
+				a.couleur = Color.red;
+				this.couleur = Color.red;
+			}
+		}
+		
 		//System.out.println("collision");
 	}
 	
@@ -85,7 +104,8 @@ public class AgentParticles extends Agent{
 				getEnv().setBall(this);
 			//	System.out.println("bougé");
 			}
-			if(posX + pasX < 0){		this.pasY = pasY;		
+			if(posX + pasX < 0){		
+				//this.pasY = pasY;		
 
 				getEnv().deleteBall(this);
 				posX = getEnv().height -1;
