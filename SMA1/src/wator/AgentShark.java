@@ -23,9 +23,16 @@ public class AgentShark extends Agent {
 	public void decide() {
 	//	System.out.println("DEBUG shark");
 		setColor(Color.RED);
-		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("poisson",posX, posY);
+		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("poisson", this);
 		if(!ad.isEmpty()){
 			Collections.shuffle(ad);
+			System.out.println(ad);
+			try {
+				Thread.sleep(20000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Direction d = ad.get(0);
 			eat(d.getX(), d.getY());
 			System.out.println("count" + countSharkStarveTime);
@@ -39,7 +46,7 @@ public class AgentShark extends Agent {
 				countSharkBreedTime--;
 		}else{
 			
-			ad = ((EnvironmentWator) getEnv()).lookAt("vide",this.posX,this.posY);
+			ad = ((EnvironmentWator) getEnv()).lookAt("vide",this);
 			if(!ad.isEmpty()){
 				Collections.shuffle(ad);
 				Direction d = ad.get(0);

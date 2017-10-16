@@ -12,22 +12,32 @@ public class EnvironmentWator extends Environment {
 		super(height, width);
 	}
 	
-	public ArrayList<Direction> lookAt(String param,int x, int y){
+	public ArrayList<Direction> lookAt(String param, Agent a){
 		ArrayList<Direction> listeDir = new ArrayList<Direction>();
+		int posX = 0, posY = 0;
+
+		
 		if(param == "vide"){
 			for (Direction d : Direction.values()){		
+
+				if ((a.getPosX() + d.getX()) < 0)
+					posX = width - 1;
+				if ((a.getPosY() + d.getY()) < 0)
+					posY = height - 1;
 				//regarde la case si vide add la liste
-				if(x + d.getX() < getWidth() && x + d.getX() >= 0 && y + d.getY() < getHeight() && y + d.getY() >= 0) {
-					if( getAgentAtPosition(x + d.getX(), y + d.getY()) == null)
-						listeDir.add(d);
-				}
+				if( getAgentAtPosition(posX % getWidth(), posY % getHeight()) == null)
+					listeDir.add(d);
 			}
 		}else if(param == "poisson"){
 			for (Direction d : Direction.values()){		
-				if(x + d.getX() < getWidth() && x + d.getX() >= 0 && y + d.getY() < getHeight() && y + d.getY() >= 0) {
-					if(getAgentAtPosition(x + d.getX(), y + d.getY()) instanceof AgentFish)
-						listeDir.add(d);
-				}
+
+				if ((a.getPosX() + d.getX()) < 0)
+					posX = width - 1;
+				if ((a.getPosY() + d.getY()) < 0)
+					posY = height - 1;
+				
+				if(getAgentAtPosition(posX % getWidth(), posY % getHeight()) instanceof AgentFish)
+					listeDir.add(d);
 			}
 		}
 		return listeDir;

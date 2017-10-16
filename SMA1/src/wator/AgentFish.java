@@ -20,7 +20,7 @@ public class AgentFish extends Agent{
 	@Override
 	public void decide() {
 		setColor(Color.BLUE);
-		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("vide",this.posX,this.posY);
+		ArrayList<Direction> ad = ((EnvironmentWator) getEnv()).lookAt("vide",this);
 		if(!ad.isEmpty()){
 			Collections.shuffle(ad);
 			int childPosX = getPosX();
