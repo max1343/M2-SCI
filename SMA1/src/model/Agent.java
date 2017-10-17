@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
-public abstract class Agent implements KeyListener {
+public abstract class Agent  {
 	
 	public enum Direction{
 		Nord(0,1),
@@ -102,20 +102,4 @@ public abstract class Agent implements KeyListener {
 		return this.env;
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-	public void keyReleased(KeyEvent e) {
-			
-	}
 }

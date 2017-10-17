@@ -1,6 +1,7 @@
 package pacman;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -31,7 +32,6 @@ public class SMAPacman extends SMA{
 		Random rnd = new Random(seed);
 		walls = new ArrayList<AgentWall>();
 		hunters = new ArrayList<AgentHunter>();
-		//EnvironmentPacman env = (EnvironmentPacman) this.getEnvironnement();
 		((EnvironmentPacman) e).initDijkstra(avatar);
 		
 		posX = rnd.nextInt(e.height - 1);
@@ -42,7 +42,7 @@ public class SMAPacman extends SMA{
 		for(int i =1;i<=nbHunters;i++){
 			posX = rnd.nextInt(e.height - 1);
 			posY = rnd.nextInt(e.width - 1);
-			ah = new AgentHunter(posX,posY,Color.RED,(EnvironmentPacman) getEnvironnement(),trace);
+			ah = new AgentHunter(posX,posY,Color.RED,(EnvironmentPacman) getEnvironnement(),trace, 2);
 			hunters.add(ah);
 			e.setBall(ah);
 		}
@@ -60,7 +60,8 @@ public class SMAPacman extends SMA{
 			e.setBall(ah);
 		}
 		
-		
+		AgentBonus ab = new AgentBonus(rnd.nextInt(e.height - 1), rnd.nextInt(e.width - 1), Color.yellow, getEnvironnement(), trace, 10, rnd, 1);
+		e.setBall(ab);
 		run();
 	}
 
@@ -73,4 +74,26 @@ public class SMAPacman extends SMA{
 	public AgentAvatar getAvatar() {
 		return avatar;
 	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_DOWN : avatar.setPasY(-1);
+								avatar.setPasX(0);
+								break;
+		case KeyEvent.VK_UP	:	avatar.setPasY(1);
+						  		avatar.setPasX(0);
+						  		break;
+						  		
+		case KeyEvent.VK_LEFT : avatar.setPasY(0);
+								avatar.setPasX(-1);
+								break;
+								
+		case KeyEvent.VK_RIGHT :avatar.setPasY(0);
+								avatar.setPasX(1);
+								break;
+	}
+	}
+	
+	
 }

@@ -1,18 +1,12 @@
 package model;
 
-import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Observable;
 
-import org.omg.CORBA.SetOverrideType;
-
-import particles.AgentParticles;
-import wator.AgentFish;
-import wator.AgentShark;
-import wator.SMAWator;
-
-public abstract class SMA extends Observable {
+public abstract class SMA extends Observable implements KeyListener{
 
 	protected ArrayList<Agent> agents;
 	protected Environment e;
@@ -97,6 +91,24 @@ public abstract class SMA extends Observable {
 
 	public String getTrace() {
 		return this.sTrace;
+	}
+	
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+			
 	}
 
 

@@ -75,13 +75,8 @@ public class Main {
 			
 
 			createCanvas();
-			
-			System.out.println(env.getAllAgents());
-			for(Agent ag: env.getAllAgents()) {
-				if(ag instanceof AgentAvatar) {
-					c.addKeyListener(ag);
-				}
-			}
+
+			c.addKeyListener(sma);
 			Fenetre f = new Fenetre(c);	
 			/**if (prop.getProperty("db.type").equals("pacman")) {
 				for(Agent ag: sma.getEnvironnement().getAllBall()) {

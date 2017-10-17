@@ -71,44 +71,33 @@ public class AgentAvatar extends Agent {
     }
 	    
 	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("DEBUG");
-		switch(e.getKeyCode()){
-			case KeyEvent.VK_DOWN : setPasY(-1);
-									setPasX(0);
-									break;
-			case KeyEvent.VK_UP	:	setPasY(1);
-							  		setPasX(0);
-							  		break;
-							  		
-			case KeyEvent.VK_LEFT : setPasY(0);
-									setPasX(-1);
-									break;
-									
-			case KeyEvent.VK_RIGHT :setPasY(0);
-									setPasX(1);
-									break;
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-			
-	}
 
 	@Override
 	public void decide() {
-		move(pasX, pasY);
-		((EnvironmentPacman) env).initDijkstra(this);
+		int x,y;
+	
+		x = ((getPosX() + pasX) % env.width);
+		y = ((getPosY() + pasY) % env.height);
+
+		if ((getPosX() + pasX) < 0)
+			x = env.width - 1;
+		if ((getPosY() + pasY) < 0)
+			y = env.height - 1;
+		
+		if(env.getAgentAtPosition(x, y) instanceof AgentBonus) {
+			eatBonus(pasX, pasY);
+		}
+		
+		if(!env.hasAgentAtPosition(x,y)) {
+			move(pasX, pasY);
+			((EnvironmentPacman) env).initDijkstra(this);
+		}
 		//setPathDijkstra((EnvironmentPacman) this.getEnv(),new ArrayList<Position>());
+	}
+	
+	public void eatBonus(int x, int y) {
+		Agent temp = env.getAgentAtPosition(x, y);
+		
 	}
 
 	public int getPasX() {

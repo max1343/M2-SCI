@@ -25,7 +25,7 @@ public class EnvironmentWator extends Environment {
 				if ((a.getPosY() + d.getY()) < 0)
 					posY = height - 1;
 				//regarde la case si vide add la liste
-				if( getAgentAtPosition(posX % getWidth(), posY % getHeight()) == null)
+				if(!hasAgentAtPosition(posX % getWidth(), posY % getHeight()))
 					listeDir.add(d);
 			}
 		}else if(param == "poisson"){
