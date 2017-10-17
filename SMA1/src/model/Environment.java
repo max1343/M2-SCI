@@ -67,5 +67,12 @@ public abstract class Environment extends Observable {
 	public Agent[][] getAgents() {
 		return agents;
 	}
+	
+	public void sendFinish() {
+		ArrayList<Agent> liste = getAllAgents();
+		for(Agent ag: liste) {
+			ag.setGameFinished(true);
+		}
+	}
 
 }

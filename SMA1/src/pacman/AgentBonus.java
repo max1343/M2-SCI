@@ -20,10 +20,12 @@ public class AgentBonus extends Agent {
 
 	@Override
 	public void decide() {
-		if(i == tour) {
-			move(rnd.nextInt(getEnv().height - 1),rnd.nextInt(getEnv().width - 1));
-		}else
-			i++;
-	}
-
+		if(!gameFinished) {
+			if(i == tour) {
+				move(rnd.nextInt(getEnv().height - 1),rnd.nextInt(getEnv().width - 1));
+				i=0;
+			}else
+				i++;
+			}
+		}
 }

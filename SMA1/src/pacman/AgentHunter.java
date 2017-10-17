@@ -15,15 +15,18 @@ public class AgentHunter extends Agent {
 	
 	@Override
 	public void decide() {
-		if(i == tour) {
-			Direction dirMin = ((EnvironmentPacman) getEnv()).getMinDirection(this);
-			//int min=e.getHeight()*e.getWidth(), ix=0, iy=0;
+		if(!gameFinished) {
+			if(i == tour) {
+				Direction dirMin = ((EnvironmentPacman) getEnv()).getMinDirection(this);
+				//int min=e.getHeight()*e.getWidth(), ix=0, iy=0;
 
-			move(dirMin.getX(),dirMin.getY());
-			i=0;
-		}else
-			i++;
+				move(dirMin.getX(),dirMin.getY());
 
-	}
+				i=0;
+			}else
+				i++;
+	
+			}
+		}
 	
 }

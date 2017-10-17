@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JTextField;
 
@@ -15,12 +16,15 @@ public class AgentAvatar extends Agent {
 	private JTextField textField;  
 	private int bonus;
 	private Random rnd;
+	int nbBonus;
+
 	
-	public AgentAvatar(int posX, int posY, Color c, EnvironmentPacman e, boolean trace Random rnd) {
+	public AgentAvatar(int posX, int posY, Color c, EnvironmentPacman e, boolean trace, Random rnd, int nbBonus) {
 		super(posX, posY, c, e, trace);
 		this.setPasX(0);
 		this.setPasY(0);
 		this.rnd = rnd;
+		this.nbBonus = nbBonus;
 		bonus = 0;
 	}
 
@@ -29,7 +33,7 @@ public class AgentAvatar extends Agent {
 		for(int i=0; i<e.getHeight(); i++){
 			for(int j=0; j<e.getWidth(); j++){
 				
-			}new AgentBonus()
+			}
 		}
 		
 	    int xc = this.posX;
@@ -77,34 +81,46 @@ public class AgentAvatar extends Agent {
 
 	@Override
 	public void decide() {
-		int x,y;
+		if(!gameFinished) {
+			int x,y;
+		
+			x = ((getPosX() + pasX) % env.width);
+			y = ((getPosY() + pasY) % env.height);
 	
-		x = ((getPosX() + pasX) % env.width);
-		y = ((getPosY() + pasY) % env.height);
-
-		if ((getPosX() + pasX) < 0)
-			x = env.width - 1;
-		if ((getPosY() + pasY) < 0)
-			y = env.height - 1;
-		
-		if(env.getAgentAtPosition(x, y) instanceof AgentBonus) {
-			eatBonus(pasX, pasY);
-		}
-		
-		if(!env.hasAgentAtPosition(x,y)) {
-			move(pasX, pasY);
-			((EnvironmentPacman) env).initDijkstra(this);
+			if ((getPosX() + pasX) < 0)
+				x = env.width - 1;
+			if ((getPosY() + pasY) < 0)
+				y = env.height - 1;
+			
+			if(env.getAgentAtPosition(x, y) instanceof AgentBonus) {
+				eatBonus(env.getAgentAtPosition(x, y));
+			}
+			
+			if(env.getAgentAtPosition(x, y) instanceof AgentFin) {
+				eatFin(env.getAgentAtPosition(x, y));
+			}
+			
+			if(!env.hasAgentAtPosition(x,y)) {
+				move(pasX, pasY);
+				((EnvironmentPacman) env).initDijkstra(this);
+			}
 		}
 		//setPathDijkstra((EnvironmentPacman) this.getEnv(),new ArrayList<Position>());
 	}
 	
-	public void eatBonus(int x, int y) {
-		Agent temp = env.getAgentAtPosition(x, y);
-		env.deleteBall(temp);
+	public void eatBonus(Agent a) {
+		env.deleteBall(a);
 		bonus++;
 		if(bonus < nbBonus){
-			AgentBonus ab = new AgentBonus(rnd.nextInt(e.height - 1), rnd.nextInt(e.width - 1), Color.yellow, getEnvironnement(), trace, 10, rnd);
+			AgentBonus ab = new AgentBonus(rnd.nextInt(env.height - 1), rnd.nextInt(env.width - 1), Color.yellow, env, trace, 10, rnd);
+		}else if(bonus == nbBonus) {
+			AgentFin af = new AgentFin(rnd.nextInt(env.height - 1), rnd.nextInt(env.width - 1), Color.pink, env, trace);
 		}
+	}
+	
+	public void eatFin(Agent a) {
+		env.deleteBall(a);
+		env.sendFinish();
 	}
 
 	public int getPasX() {

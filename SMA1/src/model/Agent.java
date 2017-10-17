@@ -45,6 +45,7 @@ public abstract class Agent  {
 	protected Environment env;
 	protected Color couleur;
 	public boolean trace;
+	public boolean gameFinished = false;
 	
 	public Agent(int posX, int posY, Color c, Environment e, boolean trace){
 		this.posX = posX;
@@ -100,6 +101,10 @@ public abstract class Agent  {
 	
 	public Environment getEnv(){
 		return this.env;
+	}
+	
+	public void setGameFinished(boolean finish) {
+		this.gameFinished = finish;
 	}
 
 }

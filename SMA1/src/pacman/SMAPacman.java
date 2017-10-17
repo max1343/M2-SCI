@@ -16,20 +16,22 @@ public class SMAPacman extends SMA{
 
 	private int seed;
 	private int posX, posY, nbHunters, nbWalls;
+	Random rnd;
 
 	public SMAPacman(EnvironmentPacman e, boolean trace, String scheduling, int nbTicks,int seed, int nbH, int nbW, String filename) {
 		super(e, trace, scheduling, nbTicks, filename);
 		this.seed = seed;
 		this.nbHunters = nbH;
 		this.nbWalls = nbW;
-		avatar = new AgentAvatar(2, 2, Color.BLUE, (EnvironmentPacman) e, true);
+		rnd = new Random(seed);
+
+		avatar = new AgentAvatar(2, 2, Color.BLUE, (EnvironmentPacman) e, true, rnd, 3);
 		e.setBall(avatar);
 	}
 
 	@Override
 	public void firstRun() {
 		// TODO Auto-generated method stub
-		Random rnd = new Random(seed);
 		walls = new ArrayList<AgentWall>();
 		hunters = new ArrayList<AgentHunter>();
 		((EnvironmentPacman) e).initDijkstra(avatar);
@@ -60,7 +62,7 @@ public class SMAPacman extends SMA{
 			e.setBall(ah);
 		}
 		
-		AgentBonus ab = new AgentBonus(rnd.nextInt(e.height - 1), rnd.nextInt(e.width - 1), Color.yellow, getEnvironnement(), trace, 10, rnd);
+		AgentBonus ab = new AgentBonus(rnd.nextInt(e.height - 1), rnd.nextInt(e.width - 1), Color.yellow, getEnvironnement(), trace, 100, rnd);
 		e.setBall(ab);
 		run();
 	}
