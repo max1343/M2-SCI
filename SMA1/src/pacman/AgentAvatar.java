@@ -13,12 +13,15 @@ import model.Position;
 public class AgentAvatar extends Agent {
 	private int pasX, pasY;
 	private JTextField textField;  
+	private int bonus;
+	private Random rnd;
 	
-	public AgentAvatar(int posX, int posY, Color c, EnvironmentPacman e, boolean trace) {
+	public AgentAvatar(int posX, int posY, Color c, EnvironmentPacman e, boolean trace Random rnd) {
 		super(posX, posY, c, e, trace);
 		this.setPasX(0);
 		this.setPasY(0);
-		
+		this.rnd = rnd;
+		bonus = 0;
 	}
 
 	
@@ -26,7 +29,7 @@ public class AgentAvatar extends Agent {
 		for(int i=0; i<e.getHeight(); i++){
 			for(int j=0; j<e.getWidth(); j++){
 				
-			}
+			}new AgentBonus()
 		}
 		
 	    int xc = this.posX;
@@ -97,7 +100,11 @@ public class AgentAvatar extends Agent {
 	
 	public void eatBonus(int x, int y) {
 		Agent temp = env.getAgentAtPosition(x, y);
-		
+		env.deleteBall(temp);
+		bonus++;
+		if(bonus < nbBonus){
+			AgentBonus ab = new AgentBonus(rnd.nextInt(e.height - 1), rnd.nextInt(e.width - 1), Color.yellow, getEnvironnement(), trace, 10, rnd);
+		}
 	}
 
 	public int getPasX() {

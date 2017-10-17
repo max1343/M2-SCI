@@ -10,7 +10,7 @@ public class AgentBonus extends Agent {
 	private int tour, i, place;
 	private Random rnd;
 	
-	public AgentBonus(int posX, int posY, Color c, Environment e, boolean trace, int tour, Random rnd, int place) {
+	public AgentBonus(int posX, int posY, Color c, Environment e, boolean trace, int tour, Random rnd) {
 		super(posX, posY, c, e, trace);
 		this.tour = tour;
 		this.rnd = rnd;

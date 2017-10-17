@@ -60,7 +60,7 @@ public class SMAPacman extends SMA{
 			e.setBall(ah);
 		}
 		
-		AgentBonus ab = new AgentBonus(rnd.nextInt(e.height - 1), rnd.nextInt(e.width - 1), Color.yellow, getEnvironnement(), trace, 10, rnd, 1);
+		AgentBonus ab = new AgentBonus(rnd.nextInt(e.height - 1), rnd.nextInt(e.width - 1), Color.yellow, getEnvironnement(), trace, 10, rnd);
 		e.setBall(ab);
 		run();
 	}
